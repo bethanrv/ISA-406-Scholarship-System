@@ -13,6 +13,9 @@
 
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script>
+
+    <!-- icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             
 </head>
 
@@ -21,34 +24,31 @@
 
     <!-- header --->
     <nav>
-        <div class="nav-wrapper red darken-3">
-          <a href="#" class="brand-logo center"> ISA Common App</a>
+        <div class="nav-wrapper header">
+          <a href="#" class="brand-logo center">Miami Oh ISA Common App</a>
         </div>
     </nav>
 
 
     <!-- sub header info -->
-    <div class="row">
+    <div id="descriptionHeader" class="row" style="padding-top: 5vh;">
         <div class="col s12 center">
-            <p> Quickly apply to all ISA department scholarships </p>
+            <p style="font-size: 1.5em;"> Quickly apply to all ISA department scholarships </p>
         </div>
     </div>
 
 
     <!-- user info area -->
     <div class="row" style="padding: 5vh;">
-        <form class="col s12">
-            <!-- first name-->
+        <div class="col show-on-large l3"> </div>
+        <form id="userInfoForm" class="col s12 l6">
+
+            <p class="center step" > Step 1: Your Info</p>
+
+            <!-- name-->
             <div class="row">
                 <div class="input-field col s12 center">
-                    <input placeholder="Frist Name" type="text">
-                </div>
-            </div>
-
-            <!-- last name-->
-            <div class="row">
-                <div class="input-field col s12">
-                    <input placeholder="Last Name" type="text">
+                    <input placeholder = "Full Name" type="text">
                 </div>
             </div>
 
@@ -56,7 +56,13 @@
              <div class="row">
                 <div class="input-field col s12">
                     <input placeholder="Email Address" type="email">
-                    <label for="email"></label>
+                </div>
+            </div>      
+
+            <!-- Mailing Address -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Mailing Address  -  Where to Send Scholarship Information" type="text">
                 </div>
             </div>      
 
@@ -66,12 +72,74 @@
 
 
 
+    <!-- Dars File Upload -->
+    <div id="darsUploadArea" class="row" onmouseover="dim('darCard')"; onmouseleave="revertDim('darCard')">
+        <div class="col s2"></div>
+        <div class="col s8 center">
+            <p class="step"> Step 2: DARS Upload</p>
+            <div id="darCard" class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <p>Save your dars report as an html file and upload it here</p>
+                    </div>
+                    <div class="card-action"upload>
+                        <a style="color: gray;">Drag HTML File Here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+    <!-- Personal Statement File Upload -->
+    <div id="statementUploadArea" class="row" onmouseover="dim('statementCard')"; onmouseleave="revertDim('statementCard')">
+        <div class="col s2"></div>
+        <div class="col s8 center">
+            <p class="step"> Step 3: Personal Statement</p>
+            <div id="statementCard" class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <p>Upload your personal statement here</p>
+                    </div>
+                    <div class="card-action"upload>
+                        <a style="color: gray;">Drag File Here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Form navigation button (Next)-->
+    <div id="navBtnRow" class="row">
+        <div class="col s12 center">
+            <a id=formNavBtn class="waves-effect waves-light btn" style="background-color: #d94141;"><i class="material-icons right">send</i>Next</a>
+        </div>
+    </div>
+
+
+    <!-- Completion Message -->
+    <div id="successMessageRow" class="row">
+        <div class="col s12 center">
+            <p class="successMessageHead"> Congradulations!</p>
+            <p class="successMessage"> Keep a look out for updates by email or mail </p>
+            <p class="successMessageSub"> - Best of luck, ISA Department Staff</p>
+        </div>
+    </div>
+
+
+
+
+    <!-- padding area -->
+    <div style="padding-bottom: 10vh;"></div>
 
 
     <!-- footer -->
     <footer>
         <p class="right" style="padding-right: 3vh;">
-            <a href="admin_login.html">Admin Login</a>
+            <a href="admin_login.html" style="text-decoration: underline;">Admin Login</a>
         </p>
     </footer>
 
@@ -79,5 +147,69 @@
 
 
 
+
+
 </body>
+
+
+<script>
+    //Fade out for user info form
+    $(document).ready(function(){
+
+        //initialize forms and upload areas
+        initForms();
+
+        //naviage thru information and file upload fields...
+        let stepNumber = 1;
+
+        $("#formNavBtn").click(function(){
+
+            if(stepNumber == 1){
+                $("#userInfoForm").fadeOut();
+                $("#darsUploadArea").fadeIn();
+                stepNumber++;
+            }
+
+            else if (stepNumber == 2){
+                $("#darsUploadArea").fadeOut();
+                $("#statementUploadArea").fadeIn();
+                stepNumber++;
+            }
+
+            else if (stepNumber == 3){
+                $("#statementUploadArea").fadeOut();
+                $("#navBtnRow").fadeOut();
+                $("#descriptionHeader").fadeOut();
+                $("#successMessageRow").fadeIn();
+                stepNumber++;
+            }
+
+
+        });
+    });
+
+
+    //fade out all steps other than 1 to start
+    function initForms(){
+        $("#darsUploadArea").fadeOut();
+        $("#statementUploadArea").fadeOut();
+        $("#successMessageRow").fadeOut();
+        
+    }
+
+
+    //modify brightness of given element
+    function dim(id){
+        let element = document.getElementById(id);
+        element.style.filter = "brightness(50%)";
+    }
+
+    function revertDim(id){
+        console.log('hit');
+        let element = document.getElementById(id);
+        element.style.filter = "brightness(100%)";
+    }
+
+</script>
+
 </html>

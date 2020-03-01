@@ -1,8 +1,35 @@
 footer {
     position: fixed;
     bottom: 0;
-    height: 10vh;
-    background-color: #cccccc;
-    font-size: 20px;
+    height: 7vh;
+    background-color: #dbdbdb;
     width : 100%;
+    z-index: 1;
  }
+
+ .header{
+    font-size: 3em;
+    background-color: #d94141;
+ }
+
+.step {
+    text-decoration: underline;
+    text-decoration-color: #d94141;
+    font-size: 1.5em;
+}
+
+.successMessage {
+    font-size: 1.5em;
+}
+
+.successMessageHead {
+    font-size: 2em;
+}
+
+.successMessageSub {
+    font-size: 1em;
+}
+
+.btn {
+    text-transform: none;
+}
