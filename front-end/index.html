@@ -28,7 +28,7 @@
     <!-- header --->
     <nav>
         <div class="nav-wrapper header">
-          <a href="#" class="brand-logo center">Miami Oh ISA Common App</a>
+          <a href="#" class="brand-logo center">ISA Common App</a>
         </div>
     </nav>
 
@@ -77,16 +77,17 @@
 
     <!-- Dars File Upload -->
     <div id="darsUploadArea" class="row" onmouseover="dim('darCard')"; onmouseleave="revertDim('darCard')">
+        <input id="darFile" type="file" style="display: none" />
         <div class="col s2"></div>
         <div class="col s8 center">
             <p class="step"> Step 2: DARS Upload</p>
-            <div id="darCard" class="card horizontal">
+            <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
                         <p>Save your dars report as an html file and upload it here</p>
                     </div>
-                    <div class="card-action"upload>
-                        <a style="color: gray;">Drag HTML File Here</a>
+                    <div id="darCard" class="card-action">
+                        <a style="color: gray;">Select Dars HTML File</a>
                     </div>
                 </div>
             </div>
@@ -98,16 +99,17 @@
 
     <!-- Personal Statement File Upload -->
     <div id="statementUploadArea" class="row" onmouseover="dim('statementCard')"; onmouseleave="revertDim('statementCard')">
+        <input id="statementFile" type="file" style="display: none" />
         <div class="col s2"></div>
         <div class="col s8 center">
             <p class="step"> Step 3: Personal Statement</p>
-            <div id="statementCard" class="card horizontal">
+            <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
                         <p>Upload your personal statement here</p>
                     </div>
-                    <div class="card-action"upload>
-                        <a style="color: gray;">Drag File Here</a>
+                    <div id="statementCard" class="card-action">
+                        <a style="color: gray;">Select Personal Statement File</a>
                     </div>
                 </div>
             </div>
@@ -189,6 +191,19 @@
 
 
         });
+
+
+
+        //open file selection
+        //dars...
+        $("#darCard").on("click", function() {
+            $("#darFile").trigger("click");
+        });
+        //statement...
+        $("#statementCard").on("click", function() {
+            $("#statementFile").trigger("click");
+        });
+
     });
 
 
@@ -204,15 +219,21 @@
     //modify brightness of given element
     function dim(id){
         let element = document.getElementById(id);
-        element.style.filter = "brightness(50%)";
+        element.style.background ="#aqua";
+        element.style.filter = "brightness(70%)";
     }
 
     function revertDim(id){
         console.log('hit');
         let element = document.getElementById(id);
+        element.style.background ="white";
         element.style.filter = "brightness(100%)";
     }
 
 </script>
+
+
+
+
 
 </html>
