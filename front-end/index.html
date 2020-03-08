@@ -64,9 +64,21 @@
              <div class="row">
                 <div class="input-field col s12">
                 	<label> Email </label>
-                    <input placeholder="Miami Email Address" type="email">
+                    <input id="emailInput" placeholder="Miami Email Address" type="email">
                 </div>
-            </div>      
+            </div>   
+
+            <div id="emailErrorMessage" class="row">
+            	<div class="col s1 left">
+            		 <i class="material-icons errorIcon">error_outline</i>
+            	</div>
+
+            	<div  class="col 11 left">
+            		 <p style="margin: 0; margin-top: 0.5vh;"> Error:  Please use your Miami University email address </p>
+            	</div>
+            </div>
+
+
         </form>
     </div>
 
@@ -212,9 +224,19 @@
         $("#formNavBtn").click(function(){
 
             if(stepNumber == 1){
-                $("#userInfoForm").fadeOut();
-                $("#addressForm").fadeIn();
-                stepNumber++;
+
+            	let email = $("#emailInput").val();
+
+            	//verify miami emial
+            	if(verifyEmail(email)){
+            		$("#userInfoForm").fadeOut();
+	                $("#addressForm").fadeIn();
+	                stepNumber++;
+            	}   
+            	else{
+            		//else display error msg
+            		$("#emailErrorMessage").fadeIn(); 
+            	}             
             }
 
             else if(stepNumber == 2){
@@ -257,11 +279,11 @@
 
     //fade out all steps other than 1 to start
     function initForms(){
+    	$("#emailErrorMessage").fadeOut();
     	$("#addressForm").fadeOut();
         $("#darsUploadArea").fadeOut();
         $("#statementUploadArea").fadeOut();
-        $("#successMessageRow").fadeOut();
-        
+        $("#successMessageRow").fadeOut();        
     }
 
 
@@ -277,6 +299,12 @@
         let element = document.getElementById(id);
         element.style.background ="white";
         element.style.filter = "brightness(100%)";
+    }
+
+
+    //verify email is a miami email address
+    function verifyEmail(email){
+    	return email.endsWith('@miamioh.edu');
     }
 
 </script>
