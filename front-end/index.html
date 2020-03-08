@@ -141,7 +141,7 @@
 
 
     <!-- Dars File Upload -->
-    <div id="darsUploadArea" class="row" onmouseover="dim('darCard')"; onmouseleave="revertDim('darCard')">
+    <div id="darsUploadArea" class="row">
         <input id="darFile" type="file" style="display: none" />
         <div class="col s2"></div>
         <div class="col s8 center">
@@ -151,8 +151,9 @@
                     <div class="card-content">
                         <p>Save your dars report as an html file and upload it here</p>
                     </div>
-                    <div id="darCard" class="card-action">
-                        <a style="color: gray;">Select Dars HTML File</a>
+                    <div id="darCard" class="card-action" onmouseover="dim('darCard')"; onmouseleave="revertDim('darCard')">
+                    	<i id="darErrorIcon" class="material-icons left errorIcon">warning</i>
+                        <a id ="darPrompt" style="color: gray;">Select Dars HTML File</a>
                     </div>
                 </div>
             </div>
@@ -163,7 +164,7 @@
 
 
     <!-- Personal Statement File Upload -->
-    <div id="statementUploadArea" class="row" onmouseover="dim('statementCard')"; onmouseleave="revertDim('statementCard')">
+    <div id="statementUploadArea" class="row">
         <input id="statementFile" type="file" style="display: none" />
         <div class="col s2"></div>
         <div class="col s8 center">
@@ -171,10 +172,11 @@
             <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
-                        <p>Upload your personal statement here</p>
+                        <p>Upload your personal statement here as a PDF file</p>
                     </div>
-                    <div id="statementCard" class="card-action">
-                        <a style="color: gray;">Select Personal Statement File</a>
+                    <div id="statementCard" class="card-action" onmouseover="dim('statementCard')"; onmouseleave="revertDim('statementCard')">
+                    	<i id="statementErrorIcon" class="material-icons left errorIcon">warning</i>
+                        <a id="statementPrompt" style="color: gray;">Select Personal Statement File</a>
                     </div>
                 </div>
             </div>
@@ -194,7 +196,7 @@
     <div id="successMessageRow" class="row">
         <div class="col s12 center">
             <p class="successMessageHead"> Congradulations!</p>
-            <p class="successMessage"> Keep a look out for updates by email or mail </p>
+            <p class="successMessage"> Keep a look out for updates by email and mail </p>
             <p class="successMessageSub"> - Best of luck, ISA Department Staff</p>
         </div>
     </div>
@@ -226,6 +228,8 @@
     //Fade out for user info form
     $(document).ready(function(){
 
+    	let testing = false;
+
         //initialize forms and upload areas
         initForms();
 
@@ -240,7 +244,7 @@
             	let name = $("#nameInput").val();
 
             	//verify miami emial & name field
-            	if(verifyEmail(email) && verifyName(name)){
+            	if(testing || (verifyEmail(email) && verifyName(name))){
             		$("#userInfoForm").fadeOut();
 	                $("#addressForm").fadeIn();
 	                stepNumber++;
@@ -249,12 +253,16 @@
 
             else if(stepNumber == 2){
             	$("#addressForm").fadeOut();
+            	$("#darErrorIcon").fadeOut();
+            	$("#navBtnRow").fadeOut();
             	$("#darsUploadArea").fadeIn();
             	stepNumber++;
             }
 
             else if (stepNumber == 3){
                 $("#darsUploadArea").fadeOut();
+                $("#statementErrorIcon").fadeOut();   
+                $("#navBtnRow").fadeOut(); 
                 $("#statementUploadArea").fadeIn();
                 stepNumber++;
             }
@@ -277,10 +285,50 @@
         $("#darCard").on("click", function() {
             $("#darFile").trigger("click");
         });
+
+
+        $("#darFile").on('input', function(){
+        	let fileName = $("#darFile").val().substring(12);
+
+        	let fileExtension = fileName.split(".")[1];
+
+        	//verify file type
+			if(fileExtension == "html"){
+				$("#darPrompt").text(fileName);
+				$("#darErrorIcon").fadeOut();
+				$("#navBtnRow").fadeIn();
+			}
+			else{
+				$("#darPrompt").text("Please upload your DARS as an html file");
+				$("#darErrorIcon").fadeIn();
+			}
+
+        });
+
         //statement...
         $("#statementCard").on("click", function() {
             $("#statementFile").trigger("click");
+
         });
+
+        $("#statementFile").on('input', function(){
+        	let fileName = $("#statementFile").val().substring(12);
+
+        	let fileExtension = fileName.split(".")[1];
+
+        	//verify file type
+			if(fileExtension == "pdf"){
+				$("#statementCard").text(fileName);
+				$("#statementErrorIcon").fadeOut();
+				$("#navBtnRow").fadeIn();
+			}
+			else{
+				$("#statementErrorIcon").fadeIn();
+				$("#statementPrompt").text("Please upload your personal statement as a pdf file");
+			}
+
+        });
+
 
     });
 
@@ -292,7 +340,7 @@
     	$("#addressForm").fadeOut();
         $("#darsUploadArea").fadeOut();
         $("#statementUploadArea").fadeOut();
-        $("#successMessageRow").fadeOut();        
+        $("#successMessageRow").fadeOut();    
     }
 
 
@@ -304,7 +352,6 @@
     }
 
     function revertDim(id){
-        console.log('hit');
         let element = document.getElementById(id);
         element.style.background ="white";
         element.style.filter = "brightness(100%)";
@@ -313,7 +360,7 @@
 
     //verify email is a miami email address
     function verifyEmail(email){
-    	if(email.endsWith('@miamioh.edu')){
+    	if(email.toLowerCase().endsWith('@miamioh.edu')){
     		$("#emailErrorMessage").fadeOut(); 
     		return true;
     	}
