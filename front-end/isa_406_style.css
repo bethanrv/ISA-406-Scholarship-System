@@ -33,3 +33,12 @@ footer {
 .btn {
     text-transform: none;
 }
+
+.subtext{
+    font-size: 1em;
+    font-style: italic;
+}
+
+.errorIcon{
+    color: red;
+}
