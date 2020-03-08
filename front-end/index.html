@@ -1,6 +1,10 @@
 <!DOCTYPE html>
+<html lang="en">
 <html>
 <head>
+
+	<meta charset="utf-8">
+
     <title>ISA Common App</title>
     <!-- main page icon -->
     <link rel="shortcut icon" href="https://miamioh.edu/fbs/_files/images/page-content/controller/staff/block-m.jpg" >
@@ -42,15 +46,16 @@
 
 
     <!-- user info area -->
-    <div class="row" style="padding-left: 5vh; padding-right: 5vh;">
+    <div id="userInfoForm" class="row" style="padding-left: 5vh; padding-right: 5vh;">
         <div class="col show-on-large l3"> </div>
-        <form id="userInfoForm" class="col s12 l6">
+        <form class="col s12 l6">
 
             <p class="center step" > Step 1: Your Info</p>
 
             <!-- name-->
             <div class="row">
                 <div class="input-field col s12 center">
+                	<label> Name </label>
                     <input placeholder = "Full Name" type="text">
                 </div>
             </div>
@@ -58,16 +63,53 @@
              <!-- Email -->
              <div class="row">
                 <div class="input-field col s12">
-                    <input placeholder="Email Address" type="email">
+                	<label> Email </label>
+                    <input placeholder="Miami Email Address" type="email">
                 </div>
             </div>      
+        </form>
+    </div>
 
-            <!-- Mailing Address -->
+
+    <!-- location info area -->
+    <div id="addressForm" class="row" style="padding-left: 5vh; padding-right: 5vh;">
+        <div class="col show-on-large l3"> </div>
+        <form id="userInfoForm" class="col s12 l6">
+
+            <p class="center step" > Step 2: Home Address</p>
+            <p class="center subtext"> Where to send your scholarship information </p>
+
+            <!-- Street Address -->
             <div class="row">
                 <div class="input-field col s12">
-                    <input placeholder="Mailing Address  -  Where to Send Scholarship Information" type="text">
+                	<label> Street  Address </label>
+                    <input placeholder="Street Address" type="text">
                 </div>
-            </div>      
+            </div> 
+
+            <!-- State -->
+            <div class="row">
+                <div class="input-field col s12">
+                	<label> State </label>
+                    <input placeholder="State" type="text">
+                </div>
+            </div>   
+
+            <!-- Zip -->
+            <div class="row">
+                <div class="input-field col s12">
+                	<label> Zip </label>
+                    <input placeholder="Zip Code" type="number">
+                </div>
+            </div> 
+
+            <!-- Country -->
+            <div class="row">
+                <div class="input-field col s12">
+                	<label> Country </label>
+                    <input placeholder="Country" type="text">
+                </div>
+            </div>    
 
         </form>
     </div>
@@ -80,7 +122,7 @@
         <input id="darFile" type="file" style="display: none" />
         <div class="col s2"></div>
         <div class="col s8 center">
-            <p class="step"> Step 2: DARS Upload</p>
+            <p class="step"> Step 3: DARS Upload</p>
             <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
@@ -102,7 +144,7 @@
         <input id="statementFile" type="file" style="display: none" />
         <div class="col s2"></div>
         <div class="col s8 center">
-            <p class="step"> Step 3: Personal Statement</p>
+            <p class="step"> Step 4: Personal Statement</p>
             <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
@@ -171,17 +213,23 @@
 
             if(stepNumber == 1){
                 $("#userInfoForm").fadeOut();
-                $("#darsUploadArea").fadeIn();
+                $("#addressForm").fadeIn();
                 stepNumber++;
             }
 
-            else if (stepNumber == 2){
+            else if(stepNumber == 2){
+            	$("#addressForm").fadeOut();
+            	$("#darsUploadArea").fadeIn();
+            	stepNumber++;
+            }
+
+            else if (stepNumber == 3){
                 $("#darsUploadArea").fadeOut();
                 $("#statementUploadArea").fadeIn();
                 stepNumber++;
             }
 
-            else if (stepNumber == 3){
+            else if (stepNumber == 4){
                 $("#statementUploadArea").fadeOut();
                 $("#navBtnRow").fadeOut();
                 $("#descriptionHeader").fadeOut();
@@ -209,6 +257,7 @@
 
     //fade out all steps other than 1 to start
     function initForms(){
+    	$("#addressForm").fadeOut();
         $("#darsUploadArea").fadeOut();
         $("#statementUploadArea").fadeOut();
         $("#successMessageRow").fadeOut();
