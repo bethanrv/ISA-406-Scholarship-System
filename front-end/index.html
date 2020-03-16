@@ -214,7 +214,7 @@
 
 
     <!-- footer -->
-    <footer>
+    <footer id = 'admin_login_link'>
         <p class="right" style="padding-right: 3vh;">
             <a href="admin_login.html" style="text-decoration: underline;">Admin Login</a>
         </p>
@@ -251,6 +251,7 @@
             	//verify miami emial & name field
             	if(testing || (verifyEmail(email) && verifyName(name))){
             		$("#userInfoForm").fadeOut();
+            		$("#admin_login_link").fadeOut();
 	                $("#addressForm").fadeIn();
 	                stepNumber++;
             	}        
@@ -366,7 +367,7 @@
     //verify email is a miami email address
     function verifyEmail(email){
     	if(email.toLowerCase().endsWith('@miamioh.edu')){
-    		$("#emailErrorMessage").fadeOut(); 
+    		$("#emailErrorMessage").fadeOut();  
     		return true;
     	}
     	$("#emailErrorMessage").fadeIn(); 
