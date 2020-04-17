@@ -56,6 +56,43 @@
 
 
 
+     <!-- admin login form -->
+    <div id="userInfoForm" class="row" style="padding-left: 5vh; padding-right: 5vh;">
+        <div class="col show-on-large l3"> </div>
+        <form class="col s12 l6">
+
+            <!-- username-->
+            <div class="row">
+                <div class="input-field col s12 center">
+                    <label> Username </label>
+                    <input id="usernameInput" placeholder = "Username" type="text">
+                </div>
+            </div>
+
+             <!-- password -->
+             <div class="row">
+                <div class="input-field col s12">
+                    <label> Password </label>
+                    <input id="passwordInput" placeholder="Password" type="password">
+                </div>
+            </div>   
+
+            <div id="loginErrorMessage" class="row" style="display: none;">
+                <div class="col s1 left">
+                     <i class="material-icons errorIcon">error_outline</i>
+                </div>
+
+                <div  class="col 11 left">
+                     <p style="margin: 0; margin-top: 0.5vh;"> Error:  Incorrect Credentials </p>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="container center"> 
+        <a id="loginBtn" class="waves-effect waves-light btn" style="background-color: #d94141;"> <i class="material-icons"> send </i></a>
+    </div>
 
 
 
@@ -64,76 +101,21 @@
 
 
 <script>
-    //Fade out for user info form
-    $(document).ready(function(){
-
-        //initialize forms and upload areas
-        initForms();
-
-        //naviage thru information and file upload fields...
-        let stepNumber = 1;
-
-        $("#formNavBtn").click(function(){
-
-            if(stepNumber == 1){
-                $("#userInfoForm").fadeOut();
-                $("#darsUploadArea").fadeIn();
-                stepNumber++;
-            }
-
-            else if (stepNumber == 2){
-                $("#darsUploadArea").fadeOut();
-                $("#statementUploadArea").fadeIn();
-                stepNumber++;
-            }
-
-            else if (stepNumber == 3){
-                $("#statementUploadArea").fadeOut();
-                $("#navBtnRow").fadeOut();
-                $("#descriptionHeader").fadeOut();
-                $("#successMessageRow").fadeIn();
-                stepNumber++;
-            }
-
-
-        });
-
-
-
-        //open file selection
-        //dars...
-        $("#darCard").on("click", function() {
-            $("#darFile").trigger("click");
-        });
-        //statement...
-        $("#statementCard").on("click", function() {
-            $("#statementFile").trigger("click");
-        });
-
+    //send to admin screen or show error message
+    $("#loginBtn").click(function(){
+        if (verifyCredentials()){
+            window.replace("admin.html")
+        }   
+        else{
+            document.getElementById("loginErrorMessage").style.display = "block";
+        }
     });
+    
 
-
-    //fade out all steps other than 1 to start
-    function initForms(){
-        $("#darsUploadArea").fadeOut();
-        $("#statementUploadArea").fadeOut();
-        $("#successMessageRow").fadeOut();
-        
-    }
-
-
-    //modify brightness of given element
-    function dim(id){
-        let element = document.getElementById(id);
-        element.style.background ="#aqua";
-        element.style.filter = "brightness(70%)";
-    }
-
-    function revertDim(id){
-        console.log('hit');
-        let element = document.getElementById(id);
-        element.style.background ="white";
-        element.style.filter = "brightness(100%)";
+    //validate user input
+    function verifyCredentials(){
+        //DB call!!!
+        return false;
     }
 
 </script>
