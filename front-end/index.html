@@ -401,18 +401,28 @@
 
     //validate that all requisite fields in address form are complete
     function validateAddress(){
-        fields = ["streetAddress", "stateAddress", "zipAddress", "countryAddress"];
-        fields.forEach(function(entry){
-            if(document.getElementById(entry).value == "")
-                return false;
-        });
+        //fields = ["streetAddress", "stateAddress", "zipAddress", "countryAddress"];
+        //fields.forEach(function(entry){
+        //    if(document.getElementById(entry).value.length == 0)
+        //        return false;
+        //    console.log(document.getElementById(entry).value);
+        //});
+
+        if(document.getElementById('streetAddress').value.length == 0)
+            return false;
+        if(document.getElementById('stateAddress').value.length == 0)
+            return false;
+        if(document.getElementById('zipAddress').value.length == 0)
+            return false;
+        if(document.getElementById('countryAddress').value.length == 0)
+            return false;
         
         return true;
     }
 
     //function to identify errors in address form to user
     function showAddressFormError(){
-
+        document.getElementById("addressErrorMessage").style.display = 'block';
     }
 
 </script>
