@@ -244,6 +244,20 @@
     //Fade out for user info form
     $(document).ready(function(){
 
+        //ajax testing
+        student = "Mike Wolzalski";
+
+        $.ajax({
+            url: "../writeStudent.php",
+            method: "post",
+            data: {student },
+            success: function(res){
+                console.log(res);
+            }
+        })
+
+
+
     	let testing = false;
 
         //initialize forms and upload areas
@@ -443,16 +457,6 @@
         };
         let darFile = $("#darFile").val();
         let statementFile = $("#statementFile").val();
-
-        //pass into db as new record - delete any record with matching name
-        <?php
-        $myfile = fopen("./back-end/db.csv", "a+") or die("Unable to open file!");
-        $txt = "John Doe\n";
-        fwrite($myfile, $txt);
-        $txt = "Jane Doe\n";
-        fwrite($myfile, $txt);
-        fclose($myfile);
-        ?>
     }
 
 </script>
