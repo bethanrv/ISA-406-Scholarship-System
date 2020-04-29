@@ -211,13 +211,6 @@
                     class="material-icons right">send</i>Next</a>
         </div>
     </div>
-    <div id="navBtnRow" class="row">
-        <div class="col s12 center">
-            <a id=testNavBtn class="waves-effect waves-light btn" style="background-color: #d94141;"><i
-                    class="material-icons right">send</i>Next</a>
-        </div>
-    </div>
-
 
     <!-- Completion Message -->
     <div id="successMessageRow" class="row">
@@ -254,37 +247,6 @@
 <script>
     //Fade out for user info form
     $(document).ready(function () {
-
-        //ajax testing
-        $("#testNavBtn").click(function () {
-            let name = $("#nameInput").val();
-            let email = $("#emailInput").val();
-            let address = $('#streetAddress').val() + " " + $('#stateAddress').val() + " " + $('#zipAddress').val() + " " + $('#countryAddress').val();
-            let date = function (sp) {
-                today = new Date();
-                var dd = today.getDate();
-                var mm = today.getMonth() + 1; //As January is 0.
-                var yyyy = today.getFullYear();
-
-                if (dd < 10) dd = '0' + dd;
-                if (mm < 10) mm = '0' + mm;
-                return (mm + sp + dd + sp + yyyy);
-            };
-            let darFile = $("#darFile").val();
-            let statementFile = $("#statementFile").val();
-
-
-            $.ajax({
-                url: "../writeStudent.php",
-                method: "post",
-                data: { name, email, date, darFile, statementFile, address },
-                success: function (res) {
-                    console.log(res);
-                }
-            })
-        });
-
-
 
         let testing = false;
 
@@ -337,6 +299,34 @@
                 $("#descriptionHeader").fadeOut();
                 $("#successMessageRow").fadeIn();
                 enterInfo();
+
+                //Ajax call to PHP --> write to DB
+                let name = $("#nameInput").val();
+                let email = $("#emailInput").val();
+                let address = $('#streetAddress').val() + " " + $('#stateAddress').val() + " " + $('#zipAddress').val() + " " + $('#countryAddress').val();
+                let date = function (sp) {
+                    today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth() + 1; //As January is 0.
+                    var yyyy = today.getFullYear();
+
+                    if (dd < 10) dd = '0' + dd;
+                    if (mm < 10) mm = '0' + mm;
+                    return (mm + sp + dd + sp + yyyy);
+                };
+                let darFile = $("#darFile").val();
+                let statementFile = $("#statementFile").val();
+
+
+                $.ajax({
+                    url: "../writeStudent.php",
+                    method: "post",
+                    data: { name, email, date, darFile, statementFile, address },
+                    success: function (res) {
+                        console.log(res);
+                    }
+                });
+
             }
 
 
