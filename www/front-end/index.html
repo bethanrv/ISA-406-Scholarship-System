@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <html>
+
 <head>
 
-	<meta charset="utf-8">
+    <meta charset="utf-8">
 
     <title>ISA Common App</title>
     <!-- main page icon -->
-    <link rel="shortcut icon" href="https://miamioh.edu/fbs/_files/images/page-content/controller/staff/block-m.jpg" >
+    <link rel="shortcut icon" href="https://miamioh.edu/fbs/_files/images/page-content/controller/staff/block-m.jpg">
 
     <!-- Style sheet -->
-    <link rel = "stylesheet" href = "./style.css"> 
+    <link rel="stylesheet" href="./style.css">
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -23,7 +24,7 @@
 
     <!-- icons pack -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-            
+
 </head>
 
 <body>
@@ -32,12 +33,13 @@
     <!-- header --->
     <nav>
         <div class="nav-wrapper header row">
-        	<div class="col hide-on-small-only" style="padding-top: 2vh;">
-        		<a href="admin_login.php" class="waves-effect waves-light btn left" style="background-color: #d94141;">Admin Login</a>
-        	</div>
-        	<div class="col">
-        		<a href="#" class="brand-logo center">ISA Common App</a>
-        	</div>
+            <div class="col hide-on-small-only" style="padding-top: 2vh;">
+                <a href="admin_login.php" class="waves-effect waves-light btn left"
+                    style="background-color: #d94141;">Admin Login</a>
+            </div>
+            <div class="col">
+                <a href="#" class="brand-logo center">ISA Common App</a>
+            </div>
         </div>
     </nav>
 
@@ -55,43 +57,43 @@
         <div class="col show-on-large l3"> </div>
         <form class="col s12 l6">
 
-            <p class="center step" > Step 1: Your Info</p>
+            <p class="center step"> Step 1: Your Info</p>
 
             <!-- name-->
             <div class="row">
                 <div class="input-field col s12 center">
-                	<label> Name </label>
-                    <input id="nameInput" placeholder = "Full Name" type="text">
+                    <label> Name </label>
+                    <input id="nameInput" placeholder="Full Name" type="text">
                 </div>
             </div>
 
-             <!-- Email -->
-             <div class="row">
+            <!-- Email -->
+            <div class="row">
                 <div class="input-field col s12">
-                	<label> Email </label>
+                    <label> Email </label>
                     <input id="emailInput" placeholder="Student@Miamioh.edu" type="email">
                 </div>
-            </div>   
+            </div>
 
             <div id="emailErrorMessage" class="row">
-            	<div class="col s1 left">
-            		 <i class="material-icons errorIcon">error_outline</i>
-            	</div>
+                <div class="col s1 left">
+                    <i class="material-icons errorIcon">error_outline</i>
+                </div>
 
-            	<div  class="col 11 left">
-            		 <p style="margin: 0; margin-top: 0.5vh;"> Error:  Please use your Miami University email address </p>
-            	</div>
+                <div class="col 11 left">
+                    <p style="margin: 0; margin-top: 0.5vh;"> Error: Please use your Miami University email address </p>
+                </div>
             </div>
 
 
             <div id="nameErrorMessage" class="row">
-            	<div class="col s1 left">
-            		 <i class="material-icons errorIcon">error_outline</i>
-            	</div>
+                <div class="col s1 left">
+                    <i class="material-icons errorIcon">error_outline</i>
+                </div>
 
-            	<div  class="col 11 left">
-            		 <p style="margin: 0; margin-top: 0.5vh;"> Error:  Please enter your full name </p>
-            	</div>
+                <div class="col 11 left">
+                    <p style="margin: 0; margin-top: 0.5vh;"> Error: Please enter your full name </p>
+                </div>
             </div>
 
 
@@ -104,55 +106,55 @@
         <div class="col show-on-large l3"> </div>
         <form id="userInfoForm" class="col s12 l6">
 
-            <p class="center step" > Step 2: Home Address</p>
+            <p class="center step"> Step 2: Home Address</p>
             <p class="center subtext"> Where to send your scholarship information </p>
 
             <!-- Street Address -->
             <div class="row">
                 <div class="input-field col s12">
-                	<label> Street  Address </label>
+                    <label> Street Address </label>
                     <input id="streetAddress" placeholder="Street Address" type="text">
                 </div>
-            </div> 
+            </div>
 
             <!-- State -->
             <div class="row">
                 <div class="input-field col s12">
-                	<label> State </label>
+                    <label> State </label>
                     <input id="stateAddress" placeholder="State" type="text">
                 </div>
-            </div>   
+            </div>
 
             <!-- Zip -->
             <div class="row">
                 <div class="input-field col s12">
-                	<label> Zip </label>
+                    <label> Zip </label>
                     <input id="zipAddress" placeholder="Zip Code" type="number">
                 </div>
-            </div> 
+            </div>
 
             <!-- Country -->
             <div class="row">
                 <div class="input-field col s12">
-                	<label> Country </label>
+                    <label> Country </label>
                     <input id="countryAddress" placeholder="Country" type="text">
                 </div>
-            </div>    
+            </div>
 
         </form>
 
-         <div id="addressErrorMessage" class="row" style="display: none">
+        <div id="addressErrorMessage" class="row" style="display: none">
             <div class="col s1 left">
-                 <i class="material-icons errorIcon">error_outline</i>
+                <i class="material-icons errorIcon">error_outline</i>
             </div>
 
-            <div  class="col 11 left">
-                 <p style="margin: 0; margin-top: 0.5vh;"> Error:  Please fill in all fields</p>
+            <div class="col 11 left">
+                <p style="margin: 0; margin-top: 0.5vh;"> Error: Please fill in all fields</p>
             </div>
         </div>
 
     </div>
-    
+
 
 
 
@@ -167,16 +169,17 @@
                     <div class="card-content">
                         <p>Save your dars report as an html file and upload it here</p>
                     </div>
-                    <div id="darCard" class="card-action" onmouseover="dim('darCard')"; onmouseleave="revertDim('darCard')">
-                    	<i id="darErrorIcon" class="material-icons left errorIcon">warning</i>
-                        <a id ="darPrompt" style="color: gray;">Select Dars HTML File</a>
+                    <div id="darCard" class="card-action" onmouseover="dim('darCard')" ;
+                        onmouseleave="revertDim('darCard')">
+                        <i id="darErrorIcon" class="material-icons left errorIcon">warning</i>
+                        <a id="darPrompt" style="color: gray;">Select Dars HTML File</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    
+
 
 
     <!-- Personal Statement File Upload -->
@@ -190,8 +193,9 @@
                     <div class="card-content">
                         <p>Upload your personal statement here as a PDF file</p>
                     </div>
-                    <div id="statementCard" class="card-action" onmouseover="dim('statementCard')"; onmouseleave="revertDim('statementCard')">
-                    	<i id="statementErrorIcon" class="material-icons left errorIcon">warning</i>
+                    <div id="statementCard" class="card-action" onmouseover="dim('statementCard')" ;
+                        onmouseleave="revertDim('statementCard')">
+                        <i id="statementErrorIcon" class="material-icons left errorIcon">warning</i>
                         <a id="statementPrompt" style="color: gray;">Select Personal Statement File</a>
                     </div>
                 </div>
@@ -203,7 +207,14 @@
     <!--Form navigation button (Next)-->
     <div id="navBtnRow" class="row">
         <div class="col s12 center">
-            <a id=formNavBtn class="waves-effect waves-light btn" style="background-color: #d94141;"><i class="material-icons right">send</i>Next</a>
+            <a id=formNavBtn class="waves-effect waves-light btn" style="background-color: #d94141;"><i
+                    class="material-icons right">send</i>Next</a>
+        </div>
+    </div>
+    <div id="navBtnRow" class="row">
+        <div class="col s12 center">
+            <a id=testNavBtn class="waves-effect waves-light btn" style="background-color: #d94141;"><i
+                    class="material-icons right">send</i>Next</a>
         </div>
     </div>
 
@@ -225,7 +236,7 @@
 
 
     <!-- footer -->
-    <footer id = 'admin_login_link'>
+    <footer id='admin_login_link'>
         <p class="right" style="padding-right: 3vh;">
             <a href="admin_login.php" style="text-decoration: underline;">Admin Login</a>
         </p>
@@ -242,23 +253,40 @@
 
 <script>
     //Fade out for user info form
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         //ajax testing
-        student = "Mike Wolzalski";
+        $("#testNavBtn").click(function () {
+            let name = $("#nameInput").val();
+            let email = $("#emailInput").val();
+            let address = $('#streetAddress').val() + " " + $('#stateAddress').val() + " " + $('#zipAddress').val() + " " + $('#countryAddress').val();
+            let date = function (sp) {
+                today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1; //As January is 0.
+                var yyyy = today.getFullYear();
 
-        $.ajax({
-            url: "../writeStudent.php",
-            method: "post",
-            data: {student },
-            success: function(res){
-                console.log(res);
-            }
-        })
+                if (dd < 10) dd = '0' + dd;
+                if (mm < 10) mm = '0' + mm;
+                return (mm + sp + dd + sp + yyyy);
+            };
+            let darFile = $("#darFile").val();
+            let statementFile = $("#statementFile").val();
+
+
+            $.ajax({
+                url: "../writeStudent.php",
+                method: "post",
+                data: { name, email, date, darFile, statementFile, address },
+                success: function (res) {
+                    console.log(res);
+                }
+            })
+        });
 
 
 
-    	let testing = false;
+        let testing = false;
 
         //initialize forms and upload areas
         initForms();
@@ -267,43 +295,43 @@
         let stepNumber = 1;
 
 
-        $("#formNavBtn").click(function(){
-            if(stepNumber == 1){
+        $("#formNavBtn").click(function () {
+            if (stepNumber == 1) {
 
-            	let email = $("#emailInput").val();
-            	let name = $("#nameInput").val();
+                let email = $("#emailInput").val();
+                let name = $("#nameInput").val();
 
-            	//verify miami emial & name field
-            	if(testing || (verifyEmail(email) && verifyName(name))){
-            		$("#userInfoForm").fadeOut();
-            		$("#admin_login_link").fadeOut();
-	                $("#addressForm").fadeIn();
-	                stepNumber++;
-            	}        
-            }
-
-            else if(stepNumber == 2){
-                if(validateAddress()){
-                	$("#addressForm").fadeOut();
-                	$("#darErrorIcon").fadeOut();
-                	$("#navBtnRow").fadeOut();
-                	$("#darsUploadArea").fadeIn();
+                //verify miami emial & name field
+                if (testing || (verifyEmail(email) && verifyName(name))) {
+                    $("#userInfoForm").fadeOut();
+                    $("#admin_login_link").fadeOut();
+                    $("#addressForm").fadeIn();
                     stepNumber++;
                 }
-                else{
+            }
+
+            else if (stepNumber == 2) {
+                if (validateAddress()) {
+                    $("#addressForm").fadeOut();
+                    $("#darErrorIcon").fadeOut();
+                    $("#navBtnRow").fadeOut();
+                    $("#darsUploadArea").fadeIn();
+                    stepNumber++;
+                }
+                else {
                     showAddressFormError();
                 }
             }
 
-            else if (stepNumber == 3){
+            else if (stepNumber == 3) {
                 $("#darsUploadArea").fadeOut();
-                $("#statementErrorIcon").fadeOut();   
-                $("#navBtnRow").fadeOut(); 
+                $("#statementErrorIcon").fadeOut();
+                $("#navBtnRow").fadeOut();
                 $("#statementUploadArea").fadeIn();
                 stepNumber++;
             }
 
-            else if (stepNumber == 4){
+            else if (stepNumber == 4) {
                 $("#statementUploadArea").fadeOut();
                 $("#navBtnRow").fadeOut();
                 $("#descriptionHeader").fadeOut();
@@ -318,50 +346,50 @@
 
         //open file selection
         //dars...
-        $("#darCard").on("click", function() {
+        $("#darCard").on("click", function () {
             $("#darFile").trigger("click");
         });
 
 
-        $("#darFile").on('input', function(){
-        	let fileName = $("#darFile").val();
+        $("#darFile").on('input', function () {
+            let fileName = $("#darFile").val();
 
-        	let fileExtension = fileName.split(".")[1];
+            let fileExtension = fileName.split(".")[1];
 
-        	//verify file type
-			if(fileExtension == "html"){
-				$("#darPrompt").text(fileName);
-				$("#darErrorIcon").fadeOut();
-				$("#navBtnRow").fadeIn();
-			}
-			else{
-				$("#darPrompt").text("Please upload your DARS as an html file");
-				$("#darErrorIcon").fadeIn();
-			}
+            //verify file type
+            if (fileExtension == "html") {
+                $("#darPrompt").text(fileName);
+                $("#darErrorIcon").fadeOut();
+                $("#navBtnRow").fadeIn();
+            }
+            else {
+                $("#darPrompt").text("Please upload your DARS as an html file");
+                $("#darErrorIcon").fadeIn();
+            }
 
         });
 
         //statement...
-        $("#statementCard").on("click", function() {
+        $("#statementCard").on("click", function () {
             $("#statementFile").trigger("click");
 
         });
 
-        $("#statementFile").on('input', function(){
-        	let fileName = $("#statementFile").val();
+        $("#statementFile").on('input', function () {
+            let fileName = $("#statementFile").val();
 
-        	let fileExtension = fileName.split(".")[1];
+            let fileExtension = fileName.split(".")[1];
 
-        	//verify file type
-			if(fileExtension == "pdf"){
-				$("#statementCard").text(fileName);
-				$("#statementErrorIcon").fadeOut();
-				$("#navBtnRow").fadeIn();
-			}
-			else{
-				$("#statementErrorIcon").fadeIn();
-				$("#statementPrompt").text("Please upload your personal statement as a pdf file");
-			}
+            //verify file type
+            if (fileExtension == "pdf") {
+                $("#statementCard").text(fileName);
+                $("#statementErrorIcon").fadeOut();
+                $("#navBtnRow").fadeIn();
+            }
+            else {
+                $("#statementErrorIcon").fadeIn();
+                $("#statementPrompt").text("Please upload your personal statement as a pdf file");
+            }
 
         });
 
@@ -370,51 +398,51 @@
 
 
     //fade out all steps other than 1 to start
-    function initForms(){
-    	$("#emailErrorMessage").fadeOut();
-    	$("#nameErrorMessage").fadeOut();
-    	$("#addressForm").fadeOut();
+    function initForms() {
+        $("#emailErrorMessage").fadeOut();
+        $("#nameErrorMessage").fadeOut();
+        $("#addressForm").fadeOut();
         $("#darsUploadArea").fadeOut();
         $("#statementUploadArea").fadeOut();
-        $("#successMessageRow").fadeOut();    
+        $("#successMessageRow").fadeOut();
     }
 
 
     //modify brightness of given element
-    function dim(id){
+    function dim(id) {
         let element = document.getElementById(id);
-        element.style.background ="#aqua";
+        element.style.background = "#aqua";
         element.style.filter = "brightness(70%)";
     }
 
-    function revertDim(id){
+    function revertDim(id) {
         let element = document.getElementById(id);
-        element.style.background ="white";
+        element.style.background = "white";
         element.style.filter = "brightness(100%)";
     }
 
 
     //verify email is a miami email address
-    function verifyEmail(email){
-    	if(email.toLowerCase().endsWith('@miamioh.edu')){
-    		$("#emailErrorMessage").fadeOut();  
-    		return true;
-    	}
-    	$("#emailErrorMessage").fadeIn(); 
-    	return false;
+    function verifyEmail(email) {
+        if (email.toLowerCase().endsWith('@miamioh.edu')) {
+            $("#emailErrorMessage").fadeOut();
+            return true;
+        }
+        $("#emailErrorMessage").fadeIn();
+        return false;
     }
 
     //verify name input has a value
-    function verifyName(name){
-    	if(name == ""){
-    		$("#nameErrorMessage").fadeIn();
-    		return false;
-    	}
-    	return true;
+    function verifyName(name) {
+        if (name == "") {
+            $("#nameErrorMessage").fadeIn();
+            return false;
+        }
+        return true;
     }
 
     //validate that all requisite fields in address form are complete
-    function validateAddress(){
+    function validateAddress() {
         //fields = ["streetAddress", "stateAddress", "zipAddress", "countryAddress"];
         //fields.forEach(function(entry){
         //    if(document.getElementById(entry).value.length == 0)
@@ -422,41 +450,42 @@
         //    console.log(document.getElementById(entry).value);
         //});
 
-        if(document.getElementById('streetAddress').value.length == 0)
+        if (document.getElementById('streetAddress').value.length == 0)
             return false;
-        if(document.getElementById('stateAddress').value.length == 0)
+        if (document.getElementById('stateAddress').value.length == 0)
             return false;
-        if(document.getElementById('zipAddress').value.length == 0)
+        if (document.getElementById('zipAddress').value.length == 0)
             return false;
-        if(document.getElementById('countryAddress').value.length == 0)
+        if (document.getElementById('countryAddress').value.length == 0)
             return false;
-        
+
         return true;
     }
 
     //function to identify errors in address form to user
-    function showAddressFormError(){
+    function showAddressFormError() {
         document.getElementById("addressErrorMessage").style.display = 'block';
     }
 
 
     //function to write info into db
-    function enterInfo(){
+    function enterInfo() {
         //collect info to enter
         let name = $("#nameInput").val();
         let email = $("#emailInput").val();
-        let date = function(sp){
+        let date = function (sp) {
             today = new Date();
             var dd = today.getDate();
-            var mm = today.getMonth()+1; //As January is 0.
+            var mm = today.getMonth() + 1; //As January is 0.
             var yyyy = today.getFullYear();
 
-            if(dd<10) dd='0'+dd;
-            if(mm<10) mm='0'+mm;
-            return (mm+sp+dd+sp+yyyy);
+            if (dd < 10) dd = '0' + dd;
+            if (mm < 10) mm = '0' + mm;
+            return (mm + sp + dd + sp + yyyy);
         };
         let darFile = $("#darFile").val();
         let statementFile = $("#statementFile").val();
+
     }
 
 </script>
