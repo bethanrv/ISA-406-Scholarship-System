@@ -44,6 +44,8 @@ footer {
     color: red;
 }
 
-#studentDataTable_filter input {
-  font-size: 10em;
+
+.fileSelectBtn{
+    border-radius: 95%;
+    
 }

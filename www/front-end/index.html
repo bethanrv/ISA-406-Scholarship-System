@@ -184,7 +184,6 @@
 
     <!-- Personal Statement File Upload -->
     <div id="statementUploadArea" class="row">
-        <input id="statementFile" type="file" style="display: none" />
         <div class="col s2"></div>
         <div class="col s8 center">
             <p class="step"> Step 4: Personal Statement</p>
@@ -197,9 +196,17 @@
                         onmouseleave="revertDim('statementCard')">
                         <i id="statementErrorIcon" class="material-icons left errorIcon">warning</i>
                         <a id="statementPrompt" style="color: gray;">Select Personal Statement File</a>
+
                     </div>
                 </div>
             </div>
+
+            
+            <form action="../addCV.php" method="post" enctype="multipart/form-data">
+                <input style="" type="file" name="statementFile" id="statementFile">
+                <input type="submit" value="Upload" name="submitCV">
+            </form>
+             
         </div>
     </div>
 
@@ -298,6 +305,7 @@
                 $("#navBtnRow").fadeOut();
                 $("#descriptionHeader").fadeOut();
                 $("#successMessageRow").fadeIn();
+
                 enterInfo();
 
                 //Ajax call to PHP --> write to DB
