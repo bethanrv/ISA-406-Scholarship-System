@@ -160,7 +160,6 @@
 
     <!-- Dars File Upload -->
     <div id="darsUploadArea" class="row">
-        <input id="darFile" type="file" style="display: none" />
         <div class="col s2"></div>
         <div class="col s8 center">
             <p class="step"> Step 3: Upload Your DARS</p>
@@ -200,15 +199,15 @@
                     </div>
                 </div>
             </div>
-
-            
-            <form action="../addCV.php" method="post" enctype="multipart/form-data">
-                <input style="" type="file" name="statementFile" id="statementFile">
-                <input type="submit" value="Upload" name="submitCV">
-            </form>
              
         </div>
     </div>
+
+    <form action="../addFiles.php" method="post" enctype="multipart/form-data">
+        <input style="" type="file" name="statementFile" id="statementFile">
+        <input style="" type="file" name="darFile" id="darFile">
+        <input id="submitFiles" type="submit" value="Upload" name="submitFiles">
+    </form>
 
 
     <!--Form navigation button (Next)-->
@@ -325,6 +324,9 @@
                 let darFile = $("#darFile").val();
                 let statementFile = $("#statementFile").val();
 
+
+                //write in cv file
+                $("#submitFiles").trigger('click');
 
                 // write student into db
                 $.ajax({
