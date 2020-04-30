@@ -43,3 +43,7 @@ footer {
 .errorIcon{
     color: red;
 }
+
+#studentDataTable_filter input {
+  font-size: 10em;
+}

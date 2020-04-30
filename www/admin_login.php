@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="https://miamioh.edu/fbs/_files/images/page-content/controller/staff/block-m.jpg" >
 
     <!-- Style sheet -->
-    <link rel = "stylesheet" href = "./style.css"> 
+    <link rel = "stylesheet" href = "./front-end/style.css"> 
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">

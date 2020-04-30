@@ -1,14 +1,6 @@
 <?php
 $myfile = fopen("./db.csv", "a+") or die("Unable to open file!");
 
-if (isset($_POST['student'])) {
-
-    echo "yeet";
-
-} else {
-    echo "nah";
-}
-
 //fwrite($myfile, $_POST['student']);
 $email = $_POST['email'];
 $name = $_POST['name'];
