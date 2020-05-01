@@ -115,6 +115,8 @@ CloseCon($conn);
 		      <th class="th-sm">Name</th>
 		      <th class="th-sm">Year</th>
 		      <th class="th-sm">Application Date</th>
+		      <th class="th-sm">Major(s)</th>
+		      <th class="th-sm">Minor(s)</th>
 		      <th class="th-sm">Cum. GPA</th>
 		      <th class="th-sm">ISA GPA</th>
 		      <th class="th-sm">Maj. GPA</th>
@@ -128,6 +130,8 @@ CloseCon($conn);
 		      <td>Tiger Nixon</td>
 		      <td>Freshmen</td>
 		      <td>04/15/2020</td>
+		      <td>ISA</td>
+		      <td>none</td>
 		      <td>2.7</td>
 		      <td>2.9</td>
 		      <td>2.1</td>
@@ -139,6 +143,8 @@ CloseCon($conn);
 		      <td>Ella Johnson</td>
 		      <td>Sophomore</td>
 		      <td>12/21/2019</td>
+		      <td>ISA</td>
+		      <td>Comp. Sci.</td>
 		      <td>3.8</td>
 		      <td>3.7</td>
 		      <td>3.7</td>
@@ -150,6 +156,8 @@ CloseCon($conn);
 		      <td>Brian Rodgers Vargo</td>
 		      <td>Senior</td>
 		      <td>1/29/2020</td>
+		      <td>Comp. Sci.</td>
+		      <td>ISA</td>
 		      <td>2.9</td>
 		      <td>2.5</td>
 		      <td>2.7</td>
@@ -161,6 +169,8 @@ CloseCon($conn);
 		      <td>Betty Smith</td>
 		      <td>Freshmen</td>
 		      <td>2/11/2020</td>
+		      <td>Stats</td>
+		      <td>ISA</td>
 		      <td>3.3</td>
 		      <td>3.7</td>
 		      <td>3.6</td>
@@ -172,6 +182,8 @@ CloseCon($conn);
 		      <td>Mike Wolzaski</td>
 		      <td>Junior</td>
 		      <td>3/1/2020</td>
+		      <td>ISA</td>
+		      <td>Stats</td>
 		      <td>3.2</td>
 		      <td>3.3</td>
 		      <td>3.3</td>
@@ -183,6 +195,8 @@ CloseCon($conn);
 		      <td>James P. Sullivan</td>
 		      <td>Junior</td>
 		      <td>4/13/2020</td>
+		      <td>ISA</td>
+		      <td>none</td>
 		      <td>2.5</td>
 		      <td>2.9</td>
 		      <td>2.8</td>
@@ -194,6 +208,8 @@ CloseCon($conn);
 		      <td>Randall Boggs</td>
 		      <td>Senior</td>
 		      <td>12/12/2019</td>
+		      <td>Finance</td>
+		      <td>ISA</td>
 		      <td>3.5</td>
 		      <td>3.4</td>
 		      <td>3.2</td>
@@ -205,6 +221,8 @@ CloseCon($conn);
 		      <td>Henry J. Waternoose III</td>
 		      <td>Senior</td>
 		      <td>4/19/2020</td>
+		      <td>ISA</td>
+		      <td>Finance</td>
 		      <td>4.0</td>
 		      <td>4.0</td>
 		      <td>4.0</td>
@@ -216,6 +234,8 @@ CloseCon($conn);
 		      <td>George Sanderson</td>
 		      <td>Freshmen</td>
 		      <td>4/10/2020</td>
+		      <td>ISA</td>
+		      <td>none</td>
 		      <td>1.3</td>
 		      <td>1.7</td>
 		      <td>1.8</td>
@@ -227,6 +247,8 @@ CloseCon($conn);
 		      <td>Pete C. Ward</td>
 		      <td>Sophomore</td>
 		      <td>2/21/2020</td>
+		      <td>ISA</td>
+		      <td>Comp. Sci/</td>
 		      <td>2.9</td>
 		      <td>2.7</td>
 		      <td>2.8</td>
