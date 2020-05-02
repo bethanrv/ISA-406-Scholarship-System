@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="https://miamioh.edu/fbs/_files/images/page-content/controller/staff/block-m.jpg" >
 
     <!-- Style sheet -->
-    <link rel = "stylesheet" href = "./style.css"> 
+    <link rel = "stylesheet" href = "./front-end/style.css"> 
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -34,7 +34,7 @@
         </div>
     </nav>
 
-	<!-- sub header info -->
+    <!-- sub header info -->
     <div id="descriptionHeader" class="row" style="padding-top: 5vh;">
         <div class="col s12 center">
             <p style="font-size: 1.5em;"> Admin Login </p>
@@ -92,7 +92,7 @@
      <!-- footer -->
     <footer>
         <p class="right" style="padding-right: 3vh;">
-            <a href="index.html" style="text-decoration: underline;">Back</a>
+            <a href="index.php" style="text-decoration: underline;">Back</a>
         </p>
     </footer>
 
@@ -105,7 +105,7 @@
     //send to admin screen or show error message
     $("#loginBtn").click(function(){
         if (verifyCredentials()){
-            window.location.replace("admin.html")
+            window.location.replace("admin.php")
         }   
         else{
             document.getElementById("loginErrorMessage").style.display = "block";
