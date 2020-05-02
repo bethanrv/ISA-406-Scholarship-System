@@ -203,9 +203,13 @@
         </div>
     </div>
 
+
+    <!-- php file upload -->
+
     <form style="display: none;" action="../addFiles.php" method="post" enctype="multipart/form-data">
-        <input style="" type="file" name="statementFile" id="statementFile">
-        <input style="" type="file" name="darFile" id="darFile">
+        <input type="file" name="statementFile" id="statementFile">
+        <input type="file" name="darFile" id="darFile">
+        <input type="text" name="uid" id="uid">
         <input id="submitFiles" type="submit" value="Upload" name="submitFiles">
     </form>
 
@@ -325,8 +329,15 @@
                 let statementFile = $("#statementFile").val();
 
 
-                //write in cv file
+                //set file names to correspond with unique id
+                let uid = email.substring(0, email.indexOf("@"));
+
+                $("#uid").val(uid);
+
+                //write in cv and dars
                 $("#submitFiles").trigger('click');
+
+
 
                 // write student into db
                 $.ajax({
@@ -338,16 +349,6 @@
                     }
                 });
 
-                // add dars and cv into db
-                $.ajax({
-                    url: "../addDars.php",
-                    method: "post",
-                    enctype: "multipart/form-data",
-                    data: {darFile},
-                    success: function(res){
-                        console.log(res);
-                    }
-                });
 
             }
 
