@@ -315,7 +315,7 @@
                 let name = $("#nameInput").val();
                 let email = $("#emailInput").val();
                 let address = $('#streetAddress').val() + " " + $('#stateAddress').val() + " " + $('#zipAddress').val() + " " + $('#countryAddress').val();
-                let date = function (sp) {
+                let date = function () {
                     today = new Date();
                     var dd = today.getDate();
                     var mm = today.getMonth() + 1; //As January is 0.
@@ -323,11 +323,10 @@
 
                     if (dd < 10) dd = '0' + dd;
                     if (mm < 10) mm = '0' + mm;
-                    return (mm + sp + dd + sp + yyyy);
+                    return (mm + '/' + dd + '/' + yyyy);
                 };
                 let darFile = $("#darFile").val();
                 let statementFile = $("#statementFile").val();
-
 
                 //set file names to correspond with unique id
                 let uid = email.substring(0, email.indexOf("@"));
@@ -337,7 +336,9 @@
                 //write in cv and dars
                 $("#submitFiles").trigger('click');
 
-
+                //set dar and cv to path + uid + filetype
+                darFile = uid + ".html";
+                statementFile = uid + ".pdf";
 
                 // write student into db
                 $.ajax({
