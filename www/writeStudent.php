@@ -1,7 +1,8 @@
 <?php
-$myfile = fopen("./back-end/db.csv", "a+") or die("Unable to open file!");
+$myfile = fopen("./back-end/students.csv", "a+") or die("Unable to open file!");
 
 //fwrite($myfile, $_POST['student']);
+$uid = $_POST['uid'];
 $email = $_POST['email'];
 $name = $_POST['name'];
 $date = $_POST['date'];
