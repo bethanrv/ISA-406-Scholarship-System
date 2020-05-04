@@ -340,25 +340,20 @@
                 darFile = uid + ".html";
                 statementFile = uid + ".pdf";
 
+
+
                 // write student into db
                 $.ajax({
                     url: "../writeStudent.php",
                     method: "post",
-                    data: {uid, name, email, date, darFile, statementFile, address },
+                    data: {uid, name, email, date, darFile, statementFile, address},
                     success: function (res) {
                         console.log(res);
                     }
                 });
 
-                //collect dars info for student
-                $.ajax({
-                    url: "../scanDars.php",
-                    method: "post",
-                    data: {uid},
-                    success: function(res){
-                        console.log(res);
-                    }
-                });
+
+             
 
 
 
