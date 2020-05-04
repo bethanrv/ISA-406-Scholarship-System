@@ -58,6 +58,7 @@ if(isset($_POST['submitFiles'])){
         $gradyear = substr($file_string, $gradyear_index, 2);  // Exampple: this variable contains "19" for gradyear 2019
         //  Convert to Freshman (1), Sophomore (2), Junior (3), Senior (4)?
         //  $year = 4 - $gradyear - <thisyear>;
+	$year = $gradyear;
         
         //  Find Cumulative GPA  //
         $gpa_index = strpos($file_string, ";\">", strpos($file_string, "graphGPALabel") + 150) + 3;
