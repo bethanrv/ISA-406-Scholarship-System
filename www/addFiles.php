@@ -59,7 +59,7 @@ if(isset($_POST['submitFiles'])){
         //  $year = 4 - $gradyear - <thisyear>;
         
         //  Find Cumulative GPA  //
-        $gpaoverall_index = strpos($file_string, ";\">", strpos($file_string, "graphGPALabel") + 150) + 3;
+        $gpa_index = strpos($file_string, ";\">", strpos($file_string, "graphGPALabel") + 150) + 3;
         $cumGPA = substr($file_string, $gpa_index, 3);
         
         $index = 1;
