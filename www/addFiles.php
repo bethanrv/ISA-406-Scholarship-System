@@ -49,6 +49,7 @@ if(isset($_POST['submitFiles'])){
         $start_index = strpos($file_string, "<br>", $end_index) + 4;
         $end_index = strpos($file_string, "<br>", $start_index + 4);
         $majors = substr($file_string, $start_index, $end_index - $start_index);
+	//  Remove tabs/spaces at beginning
         
         //  Find Minor..?  //
         
