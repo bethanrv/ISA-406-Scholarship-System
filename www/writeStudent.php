@@ -6,10 +6,8 @@ $uid = $_POST['uid'];
 $email = $_POST['email'];
 $name = $_POST['name'];
 $date = $_POST['date'];
-$darFile = $_POST['darFile'];
-$statementFile = $_POST['statementFile'];
 $address = $_POST['address'];
 
-fwrite($myfile, PHP_EOL . "$name,$email,$darFile,$statementFile,$date,$address");
+fwrite($myfile, PHP_EOL . "$uid,$name,$email,$date,$address");
 fclose($myfile);
 ?>

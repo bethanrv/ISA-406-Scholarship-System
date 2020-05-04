@@ -36,38 +36,8 @@
 
 </head>
 
-<style type="text/css">
-	table.dataTable thead .sorting:after,
-	table.dataTable thead .sorting:before,
-	table.dataTable thead .sorting_asc:after,
-	table.dataTable thead .sorting_asc:before,
-	table.dataTable thead .sorting_asc_disabled:after,
-	table.dataTable thead .sorting_asc_disabled:before,
-	table.dataTable thead .sorting_desc:after,
-	table.dataTable thead .sorting_desc:before,
-	table.dataTable thead .sorting_desc_disabled:after,
-	table.dataTable thead .sorting_desc_disabled:before {
-		bottom: .5em;
-	}
 
-	#dtBasicExample_filter label {
-		font-size: 1.5em;
-		font-weight: 100;
-		color: black;
-	}
 
-	#myInput {
-		width: 100%;
-		/* Full-width */
-		font-size: 16px;
-		/* Increase font-size */
-		padding: 12px 20px 12px 40px;
-		/* Add some padding */
-		border: 1px solid #ddd;
-		/* Add a grey border */
-		margin-bottom: 12px;
-		/* Add some space below the input */
-	}
 </style>
 
 <body>
@@ -104,11 +74,9 @@
 
 
 
-	<input type="text" id="myInput" onkeyup="search()" placeholder="Search for names..">
-
 	<div class="container center" style="padding-bottom: 5vh;" id="test">
 
-		<!-- <table id="studentDataTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%"
+		<table id="studentDataTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%"
 			style="padding: 5vh;">
 			<thead>
 				<tr>
@@ -125,59 +93,9 @@
 					<th class="th-sm"> CV </th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td>Tiger Nixon</td>
-					<td>Freshmen</td>
-					<td>04/15/2020</td>
-					<td>ISA</td>
-					<td>none</td>
-					<td>2.7</td>
-					<td>2.9</td>
-					<td>2.1</td>
-					<td class="center"><i class="material-icons"> edit </i></td>
-					<td class="center"><i class="material-icons"> folder_open </i></td>
-					<td class="center"><i class="material-icons"> format_align_left </i></td>
-				</tr>
-				<tr>
-					<td>Ella Johnson</td>
-					<td>Sophomore</td>
-					<td>12/21/2019</td>
-					<td>ISA</td>
-					<td>Comp. Sci.</td>
-					<td>3.8</td>
-					<td>3.7</td>
-					<td>3.7</td>
-					<td class="center"><i class="material-icons"> edit </i></td>
-					<td class="center"><i class="material-icons"> folder_open </i></td>
-					<td class="center"><i class="material-icons"> format_align_left </i></td>
-				</tr>
-				<tr>
-					<td>Brian Rodgers Vargo</td>
-					<td>Senior</td>
-					<td>1/29/2020</td>
-					<td>Comp. Sci.</td>
-					<td>ISA</td>
-					<td>2.9</td>
-					<td>2.5</td>
-					<td>2.7</td>
-					<td class="center"><i class="material-icons"> edit </i></td>
-					<td class="center"><i class="material-icons"> folder_open </i></td>
-					<td class="center"><i class="material-icons"> format_align_left </i></td>
-				</tr>
-				<tr>
-					<td>Betty Smith</td>
-					<td>Freshmen</td>
-					<td>2/11/2020</td>
-					<td>Stats</td>
-					<td>ISA</td>
-					<td>3.3</td>
-					<td>3.7</td>
-					<td>3.6</td>
-					<td class="center"><i class="material-icons"> edit </i></td>
-					<td class="center"><i class="material-icons"> folder_open </i></td>
-					<td class="center"><i class="material-icons"> format_align_left </i></td>
-				</tr>
+			<tbody id="studentDataTableBody">
+
+
 				<tr>
 					<td>Mike Wolzaski</td>
 					<td>Junior</td>
@@ -257,7 +175,7 @@
 					<td class="center"><i class="material-icons"> format_align_left </i></td>
 				</tr>
 			</tbody>
-		</table> -->
+		</table>
 	</div>
 
 
@@ -278,48 +196,100 @@
 
 <script>
 
+	let flag = true;
+
 	//on page load...
 	$(document).ready(function () {
 		//DB Call for all application info + load summary (total apps and avg gpa)
+		if(flag){
+			$.ajax({
+				type: "GET",
+				url: "../back-end/students.csv",
+				dataType: "text",
+				success: function (data) {
 
-		$.ajax({
-			type: "GET",
-			url: "../back-end/db.csv",
-			dataType: "text",
-			success: function (data) {
-				processData(data);
-				var dbFile = processData(data);
-				console.log(dbFile);
+					processData(data);
+					var dbFile = processData(data);
 
-				var mytable = "<table id=\"studentDataTable\" class=\"table table-striped table-bordered \
-				 table-sm\" cellspacing=\"0\" width=\"100%\"style=\"padding: 5vh;\"><thead><tr>";
-				for (var n = 0; n < dbFile[0].length; n++) {
-					mytable += "<th class=\"th-sm\" onclick=\"sortTable(0)\">" + dbFile[0][n] + "</th>";
-				}
+					dbFile.forEach(function(element){
+						appendToTable(element);
+					});
 
-				mytable += "</tr></thead><tbody>";
 
-				for (var i = 1; i < dbFile.length; i++) {
-					mytable += "<tr>";
-					for (var n = 0; n < dbFile[i].length; n++) {
-						mytable += "<td>" + dbFile[i][n] + "</td>";
+					/*
+					var mytable = "<table id=\"studentDataTable\" class=\"table table-striped table-bordered \
+					 table-sm\" cellspacing=\"0\" width=\"100%\"style=\"padding: 5vh;\"><thead><tr>";
+					for (var n = 0; n < dbFile[0].length; n++) {
+						mytable += "<th class=\"th-sm\" onclick=\"sortTable(0)\">" + dbFile[0][n] + "</th>";
 					}
-					mytable += "<td class=\"center\"><i class=\"material-icons\"> edit </i></td> \
-					<td class=\"center\"><i class=\"material-icons\"> folder_open </i></td> \
-					<td class=\"center\"><i class=\"material-icons\"> format_align_left </i></td>";
-					mytable += "</tr>";
+
+					mytable += "</tr></thead><tbody>";
+
+					for (var i = 1; i < dbFile.length; i++) {
+						mytable += "<tr>";
+						for (var n = 0; n < dbFile[i].length; n++) {
+							mytable += "<td>" + dbFile[i][n] + "</td>";
+						}
+						mytable += "<td class=\"center\"><i class=\"material-icons\"> edit </i></td> \
+						<td class=\"center\"><i class=\"material-icons\"> folder_open </i></td> \
+						<td class=\"center\"><i class=\"material-icons\"> format_align_left </i></td>";
+						mytable += "</tr>";
+					}
+
+					mytable += "</tbody>";
+
+					console.log(mytable);
+
+					document.getElementById("test").innerHTML = mytable;
+					*/
 				}
-
-				mytable += "</tbody>";
-
-				console.log(mytable);
-
-				document.getElementById("test").innerHTML = mytable;
-			}
-		});
-
+			});
+		}
 
 	});
+
+	//adding an element to table
+	function appendToTable(info, table){
+
+		let entry = "";
+
+		info = info.split(',');
+
+		console.log(info);
+
+		entry += 
+			"<tr>" +
+				"<td>"+  info[1] +"</td>" +
+				"<td> -- </td>" +
+				"<td>"+  info[3] +"</td>" +
+				"<td> -- </td>" +
+				"<td> -- </td>" +
+				"<td> -- </td>" +
+				"<td> -- </td>" +
+				"<td> -- </td>" +
+				"<td class='center'><i class='material-icons'> edit </i></td>" +
+				"<td class='center'><i class='material-icons'> folder_open </i></td>" +
+				"<td class='center'><i class='material-icons'> format_align_left </i></td>" +
+			"</tr>";
+
+		$("#studentDataTableBody").append(entry);
+
+		/*
+		<tr>
+			<td>Pete C. Ward</td>
+			<td>Sophomore</td>
+			<td>2/21/2020</td>
+			<td>ISA</td>
+			<td>Comp. Sci/</td>
+			<td>2.9</td>
+			<td>2.7</td>
+			<td>2.8</td>
+			<td class="center"><i class="material-icons"> edit </i></td>
+			<td class="center"><i class="material-icons"> folder_open </i></td>
+			<td class="center"><i class="material-icons"> format_align_left </i></td>
+		</tr>
+		*/
+	}
 
 
 	//table sorting
@@ -337,23 +307,17 @@
 	function processData(allText) {
 		var allTextLines = allText.split(/\r\n|\n/);
 		var headers = allTextLines[0].split(',');
+		allTextLines = allTextLines.slice(1); //remove header for reading
 		var lines = [];
 
-		for (var i = 0; i < allTextLines.length; i++) {
-			var data = allTextLines[i].split(',');
-			if (data.length == headers.length) {
-
-				var tarr = [];
-				for (var j = 0; j < headers.length; j++) {
-					tarr.push(data[j]);
-				}
-				lines.push(tarr);
+		allTextLines.forEach(function(element){
+			if(element.split(',').length > 0){
+				lines.push(element);
 			}
-		}
-		for (var i = 0; i < lines.length; i++) {
-			console.log(lines[i]);
-		}
+		});
+
 		return lines;
+
 	}
 
 	function search() {
