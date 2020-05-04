@@ -41,7 +41,7 @@ if(isset($_POST['submitFiles'])){
          * $majGPA: Same as isaGPA, also not sure how to identify which courses are from their major
          */
         
-        $file_string = file_get_contents("back-end/Dars/" . $uid . ".csv");
+        $file_string = file_get_contents("back-end/Dars/" . $uid . ".html");
         
         //  Find Major  //
         $start_index = strpos($file_string, "-->", strpos($file_string, "Request Audit") + 17) + 3;
