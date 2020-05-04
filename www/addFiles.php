@@ -36,9 +36,9 @@ if(isset($_POST['submitFiles'])){
         /*
          * Done (I think): $majors, $cumGPA, $isaGrades
          * $year: 99% done, need to convert from gradyear to year.
-         * $minors: Cannot be found in the DARS file?
-         * $isaGPA: Not sure how to weight based on course credit.
-         * $majGPA: Same as isaGPA, also not sure how to identify which courses are from their major
+         * $minors: Ask John for his file
+         * $isaGPA: Find field in file
+         * $majGPA: Find field in file
          */
         
         $file_string = file_get_contents("back-end/Dars/" . $uid . ".html");
@@ -51,7 +51,7 @@ if(isset($_POST['submitFiles'])){
         $majors = substr($file_string, $start_index, $end_index - $start_index);
 	//  Remove tabs/spaces at beginning
         
-        //  Find Minor..?  //
+        //  Find Minor..? (ask John)  //
         
         //  Find Graduation Date  //
         $gradyear_index = strpos($file_string, "Graduation Date") + 30;
@@ -91,47 +91,6 @@ if(isset($_POST['submitFiles'])){
                 $isaGrades = $isaGrades.", ";
               }
               $isaGrades = $isaGrades.$course.": ".$grade;
-              
-              //  Tally up ISA grades
-              switch ($grade) {
-                case "A+":
-                  //  4.0 
-                break;
-                case "A ":
-                  //  4.0
-                break;
-                case "A-":
-                  //  3.7
-                break;
-                case "B+":
-                  //  3.3
-                break;
-                case "B ": 
-                  //  3.0
-                break;
-                case "B-":
-                  //  2.7
-                break;
-                case "C+":
-                  //  2.3
-                break;
-                case "C ":
-                  //  2.0
-                break;
-                case "C-": 
-                  //  1.7
-                break;
-                case "D+":
-                  //  1.3
-                break;
-                case "D ":
-                  //  1.0
-                break;
-                default:
-                  //  0.0
-            }
-            
-            //  Add course to MAJOR list for calculating $majGPA..?
           }
         }
       }
