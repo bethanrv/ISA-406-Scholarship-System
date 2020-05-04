@@ -61,42 +61,42 @@ while ($index != FALSE) {
       $isaGrades = $isaGrades.$course.": ".$grade;
       
       //  Tally up ISA grades
-      if ($grade == "A+") {
-       //  4.0 
-      }
-      else if ($grade == "A ") {
-       //  4.0 
-      }
-      else if ($grade == "A-") {
-       // 3.7 
-      }
-      else if ($grade == "B+") {
-       // 3.3 
-      }
-      else if ($grade == "B ") {
-       // 3.0 
-      }
-      else if ($grade == "B-") {
-       // 2.7 
-      }
-      else if ($grade == "C+") {
-       // 2.3 
-      }
-      else if ($grade == "C ") {
-       // 2.0 
-      }
-      else if ($grade == "C-") {
-       // 1.7 
-      }
-      else if ($grade == "D+") {
-       // 1.3 
-      }
-      else if ($grade == "D ") {
-       // 1.0 
-      }
-      else {
-       // 0.0 
-      }
+      switch ($grade) {
+        case "A+":
+          //  4.0 
+        break;
+        case "A ":
+          //  4.0
+        break;
+        case "A-":
+          //  3.7
+        break;
+        case "B+":
+          //  3.3
+        break;
+        case "B ": 
+          //  3.0
+        break;
+        case "B-":
+          //  2.7
+        break;
+        case "C+":
+          //  2.3
+        break;
+        case "C ":
+          //  2.0
+        break;
+        case "C-": 
+          //  1.7
+        break;
+        case "D+":
+          //  1.3
+        break;
+        case "D ":
+          //  1.0
+        break;
+        default:
+          //  0.0
     }
     
     //  Add course to MAJOR list for calculating $majGPA..?
