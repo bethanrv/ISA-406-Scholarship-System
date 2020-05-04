@@ -13,6 +13,15 @@ $isaGPA = "3.0";
 $majGPA = "3.0";
 $isaGrades = "ISA 406: A, ISA 203: B, ISA 102: A"; //could also store in a data structure 
 
+//  ------------------  //
+/*
+ * Done (I think): $majors, $cumGPA, $isaGrades
+ * $year: 99% done, need to convert from gradyear to year.
+ * $minors: Cannot be found in the DARS file?
+ * $isaGPA: Not sure how to weight based on course credit.
+ * $majGPA: Same as isaGPA, also not sure how to identify which courses are from their major
+ */
+
 $file_string = file_get_contents("back-end/Dars/" . $uid . ".csv");
 
 //  Find Major  //
@@ -38,6 +47,8 @@ $index = 1;
 $isaGrades = "";
 $isaGPACount = 0;
 $isaCourseCount = 0;
+$majGPACount = 0;
+$majCourseCount = 0;
 while ($index != FALSE) {
   $index = strpos($file_string, "takenCourse", $index + 2);
   
@@ -107,7 +118,8 @@ while ($index != FALSE) {
 
 //  Find Major GPA..?  //
 
-
+//  ------------------  //
+  
 //stores info into student info csv and grades csv
 $studentInfoFile = fopen("./back-end/studentInfo.csv", "a+") or die("Unable to open file!");
 $gradesFile = fopen("./back-end/studentGrades.csv", "a+") or die("Unable to open file!");
