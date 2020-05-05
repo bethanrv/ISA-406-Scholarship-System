@@ -61,7 +61,7 @@
 						<td class="center" style="font-weight: 700 ;"> Summary </td>
 					</tr>
 					<tr>
-						<td id="totalSubmissions" class="center">Total Submission: </td>
+						<td id="totalSubmissions" class="center">Total Submissions: </td>
 					</tr>
 					<tr>
 						<td id="avgGpa" class="center">Average GPA: </td>
@@ -216,6 +216,7 @@
 		$("#studentDataTableBody").append(entry);
 
 		strinifyStudentData(students);
+		loadSummary();
 
 	}
 
@@ -239,6 +240,7 @@
         });
 
 	}
+
  
 	function processData(allText) {
 		var allTextLines = allText.split(/\r\n|\n/);
