@@ -34,9 +34,8 @@ if(isset($_POST['submitFiles'])){
 
         //  ------------------  //
         /*
-         * Done (I think): $majors, $cumGPA, $isaGrades
-         * $year: 99% done, need to convert from gradyear to year.
-         * $minors: Ask John for his file
+         * Done (I think): $majors, $minors, $cumGPA, $isaGrades
+         * $year: gradyear or year?
          * $isaGPA: Find field in file
          * $majGPA: Find field in file
          */
@@ -48,11 +47,17 @@ if(isset($_POST['submitFiles'])){
         $end_index = strpos($file_string, "<!--", $start_index);
         $start_index = strpos($file_string, "<br>", $end_index) + 4;
         $end_index = strpos($file_string, "<br>", $start_index + 4);
-        $majors = substr($file_string, $start_index, $end_index - $start_index);
-	//  Remove tabs/spaces at beginning
+        $majors = trim(substr($file_string, $start_index, $end_index - $start_index));
         
-        //  Find Minor..? (ask John)  //
-        
+        //  Find Minor  //
+	$minors = "none"
+        $minor_index = strpos($file_string, " Minor");
+	if ($minor_index) {
+	  $minors = substr($file_string, $minor_index - 30, 36);  // Find the minor, but include extra leading characters
+	  $minors_start = strlen($minors) - strpos(strrev($minors), ">");  // Reverse the string to find the last index of ">"
+	  $minors = substr($minors, $minors_start);
+	}
+	
         //  Find Graduation Date  //
         $gradyear_index = strpos($file_string, "Graduation Date") + 30;
         $gradyear = substr($file_string, $gradyear_index, 2);  // Exampple: this variable contains "19" for gradyear 2019
