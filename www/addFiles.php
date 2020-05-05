@@ -10,33 +10,32 @@ $uid = $_POST['uid'];
 
 if(isset($_POST['submitFiles'])){
 
-	$target_dir_cv = "./back-end/CV/";
-	$target_dir_dar = "./back-end/Dars/";
-	$cv_file = $target_dir_cv . basename($uid . '.pdf');
-	$dar_file = $target_dir_dar . basename($uid . '.html');
+  $target_dir_cv = "./back-end/CV/";
+  $target_dir_dar = "./back-end/Dars/";
+  $cv_file = $target_dir_cv . basename($uid . '.pdf');
+  $dar_file = $target_dir_dar . basename($uid . '.html');
 
-	move_uploaded_file($_FILES["statementFile"]["tmp_name"], $cv_file);
-	move_uploaded_file($_FILES["darFile"]["tmp_name"], $dar_file);
-
-
-	//read from dars file and save info
-	$dars = fopen("./back-end/Dars/" . $uid . ".html", "r") or die("Unable to open file!");
+  move_uploaded_file($_FILES["statementFile"]["tmp_name"], $cv_file);
+  move_uploaded_file($_FILES["darFile"]["tmp_name"], $dar_file);
 
 
-	//save info into the following fields (currently populated with dummy data)
-	$year = "1";
-	$majors = "ISA";
-	$minors = "";
-	$cumGPA = "2.9";
-	$isaGPA = "3.0";
-	$majGPA = "3.0";
-	$isaGrades = "ISA 406: A, ISA 203: B, ISA 102: A"; //could also store in a data structure 
+  //read from dars file and save info
+  $dars = fopen("./back-end/Dars/" . $uid . ".html", "r") or die("Unable to open file!");
+
+
+  //save info into the following fields (currently populated with dummy data)
+  $year = "1";
+  $majors = "ISA";
+  $minors = "";
+  $cumGPA = "2.9";
+  $isaGPA = "3.0";
+  $majGPA = "3.0";
+  $isaGrades = "ISA 406: A, ISA 203: B, ISA 102: A"; //could also store in a data structure 
 
         //  ------------------  //
         /*
-         * Done (I think): $majors, $cumGPA, $isaGrades
-         * $year: 99% done, need to convert from gradyear to year.
-         * $minors: Ask John for his file
+         * Done (I think): $majors, $minors, $cumGPA, $isaGrades
+         * $year: gradyear or year?
          * $isaGPA: Find field in file
          * $majGPA: Find field in file
          */
@@ -48,17 +47,23 @@ if(isset($_POST['submitFiles'])){
         $end_index = strpos($file_string, "<!--", $start_index);
         $start_index = strpos($file_string, "<br>", $end_index) + 4;
         $end_index = strpos($file_string, "<br>", $start_index + 4);
-        $majors = substr($file_string, $start_index, $end_index - $start_index);
-	//  Remove tabs/spaces at beginning
+        $majors = trim(substr($file_string, $start_index, $end_index - $start_index));
         
-        //  Find Minor..? (ask John)  //
-        
+        //  Find Minor  //
+  $minors = "none";
+        $minor_index = strpos($file_string, " Minor");
+  if ($minor_index) {
+    $minors = substr($file_string, $minor_index - 30, 36);  // Find the minor, but include extra leading characters
+    $minors_start = strlen($minors) - strpos(strrev($minors), ">");  // Reverse the string to find the last index of ">"
+    $minors = substr($minors, $minors_start);
+  }
+  
         //  Find Graduation Date  //
         $gradyear_index = strpos($file_string, "Graduation Date") + 30;
         $gradyear = substr($file_string, $gradyear_index, 2);  // Exampple: this variable contains "19" for gradyear 2019
         //  Convert to Freshman (1), Sophomore (2), Junior (3), Senior (4)?
         //  $year = 4 - $gradyear - <thisyear>;
-	$year = $gradyear;
+  $year = $gradyear;
         
         //  Find Cumulative GPA  //
         $gpa_index = strpos($file_string, ";\">", strpos($file_string, "graphGPALabel") + 150) + 3;
@@ -85,7 +90,7 @@ if(isset($_POST['submitFiles'])){
             $grade = substr($file_string, $grade_pos + 33, 2);
         
             //  Add course to ISA list
-            if (substr($course, 0, 3) == "ISA") {
+            if (substr($course, 0, 3) == "ISA" && !strpos($isaGrades, $course)) {
               //  Append to end of $isaGrades
               if (strlen($isaGrades) > 0) {
                 $isaGrades = $isaGrades.", ";
@@ -99,19 +104,19 @@ if(isset($_POST['submitFiles'])){
         
         //  Find Major GPA..?  //
 //  ------------------  //
-	
-	//stores info into student info csv and grades csv
-	$studentInfoFile = fopen("./back-end/studentInfo.csv", "a+") or die("Unable to open file!");
-	$gradesFile = fopen("./back-end/studentGrades.csv", "a+") or die("Unable to open file!");
+  
+  //stores info into student info csv and grades csv
+  $studentInfoFile = fopen("./back-end/studentInfo.csv", "a+") or die("Unable to open file!");
+  $gradesFile = fopen("./back-end/studentGrades.csv", "a+") or die("Unable to open file!");
 
-	fwrite($studentInfoFile, PHP_EOL . "$uid,$year,$majors,$minors,$cumGPA,$isaGPA,$majGPA");
-	fwrite($gradesFile, PHP_EOL . "$uid,$isaGrades");
+  fwrite($studentInfoFile, PHP_EOL . "$uid,$year,$majors,$minors,$cumGPA,$isaGPA,$majGPA");
+  fwrite($gradesFile, PHP_EOL . "$uid,$isaGrades");
 
-	fclose($studentInfoFile);
-	fclose($gradesFile);
-	fclose($dars);
+  fclose($studentInfoFile);
+  fclose($gradesFile);
+  fclose($dars);
 
-	
+  
 }
 
 

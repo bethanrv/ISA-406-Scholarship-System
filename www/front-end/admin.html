@@ -120,6 +120,7 @@
 
 	let students = {}; //all students stored by uid
 	let grades = {}; //all grades stored by uid
+	let UIDs = [] //additional list used for passing to php functions
 
 	//on page load...
 	$(document).ready(function () {
@@ -139,7 +140,8 @@
 				dbFile.forEach(function(info){
 					info = info.split(',');
 					students[info[0]] = {'Name':info[1], 'App Date':info[3], 'Year': '--', 'Major': '--','Minor': '--','cum gpa': '--','isa gpa': '--','maj gpa': '--' }; //add new student
-					
+					//appened uid to list
+
 				});
 			}
 		});
@@ -159,6 +161,9 @@
 					info = info.split(',');
 
 					students[info[0]]['Year'] = "20" + info[1];
+					students[info[0]]['Major'] = info[2];
+					students[info[0]]['Minor'] = info[3];
+					students[info[0]]['cum gpa'] = info[4];
 					
 				});
 				loadGrades();
@@ -195,9 +200,9 @@
 						"<td>"+  info[student]['Name'] +"</td>" + //name
 						"<td>"+ info[student]['App Date'] +"</td>" +	
 						"<td>"+ info[student]['Year'] +"</td>" + // application date
-						"<td> -- </td>" +
-						"<td> -- </td>" +
-						"<td> -- </td>" +
+						"<td>" + info[student]['Major'] + "</td>" +
+						"<td>" + info[student]['Minor'] + "</td>" +
+						"<td>" + info[student]['cum gpa'] + "</td>" +
 						"<td> -- </td>" +
 						"<td> -- </td>" +
 						"<td class='center'><i class='material-icons'> edit </i></td>" +
@@ -207,6 +212,8 @@
 		}
 
 		$("#studentDataTableBody").append(entry);
+
+
 	}
 
 
@@ -231,14 +238,12 @@
 
 	//test basic client file download
 	function downloadResults(){
-
-
         $.ajax({
-            url: "../downloadStudent.php",
+            url: "../downloadStudents.php",
             method: "post",
-            data: {'students':students},
+            data: {'UIDs':UIDs},
             success: function(){
-            	window.open("../downloadStudent.php");
+            	window.open("../downloadStudents.php");
             }
         });
 	}
