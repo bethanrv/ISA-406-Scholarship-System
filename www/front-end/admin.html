@@ -103,7 +103,7 @@
 
 	<!-- download all-->
 	<div class="container center">
-		<a class="btn waves-effect waves-light" style="background-color: #d94141;"> Download Results</a>
+		<a class="btn waves-effect waves-light" onclick="downloadResults()" style="background-color: #d94141;"> Download Results</a>
 	</div>
 
 
@@ -224,6 +224,23 @@
 		});
 
 		return lines;
+	}
+
+
+
+
+	//test basic client file download
+	function downloadResults(){
+
+
+        $.ajax({
+            url: "../downloadStudent.php",
+            method: "post",
+            data: {'students':students},
+            success: function(){
+            	window.open("../downloadStudent.php");
+            }
+        });
 	}
 
 
