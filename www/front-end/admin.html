@@ -76,7 +76,7 @@
 
 	<div class="container center" style="padding-bottom: 5vh;" id="test">
 
-		<table id="studentDataTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%"
+		<table id="studentDataTable" class="table table-striped table-bordered" cellspacing="0" width="100%"
 			style="padding: 5vh;">
 			<thead>
 				<tr>
@@ -95,20 +95,7 @@
 			</thead>
 			<tbody id="studentDataTableBody">
 
-				<!--Example table element (do not remove)-->
-				<tr style="display: none;">
-					<td>James P. Sullivan</td>
-					<td>4/13/2020</td>
-					<td>2020</td>
-					<td>ISA</td>
-					<td>none</td>
-					<td>2.5</td>
-					<td>2.9</td>
-					<td>2.8</td>
-					<td class="center"><i class="material-icons"> edit </i></td>
-					<td class="center"><i class="material-icons"> folder_open </i></td>
-					<td class="center"><i class="material-icons"> format_align_left </i></td>
-				</tr>
+				
 			</tbody>
 		</table>
 	</div>
@@ -138,16 +125,11 @@
 	//on page load...
 	$(document).ready(function () {
 		//DB Call for all application info + load summary (total apps and avg gpa)
-		
 		loadStudents();
-
-
 	});
 
 	function loadStudents(){
 		//store name, app date
-
-		
 		$.ajax({
 			type: "GET",
 			url: "../back-end/students.csv",
@@ -160,11 +142,9 @@
 					students[info[0]] = {'Name':info[1], 'App Date':info[3], 'Year': '--', 'Major': '--','Minor': '--','cum gpa': '--','isa gpa': '--','maj gpa': '--' }; //add new student
 					
 				});
-
-				loadAdditionalInfo();
 			}
 		});
-
+		loadAdditionalInfo();
 	}
 
 	function loadAdditionalInfo(){
@@ -180,13 +160,14 @@
 					info = info.split(',');
 
 					students[info[0]]['Year'] = "20" + info[1];
-					//console.log(students[info[0]]['Year']); //console says type error but still works???
-					loadGrades();
-					appendToTable(students);
+					
 				});
-
+				loadGrades();
+				appendToTable(students);
 			}
 		});
+
+		
 
 	}
 
@@ -216,8 +197,6 @@
 		console.log(info);
 
 		for(var student in info){
-
-			if(listedStudents.includes(student)){
 				entry += 
 					"<tr>" +
 						"<td>"+  info[student]['Name'] +"</td>" + //name
@@ -232,11 +211,6 @@
 						"<td class='center'><i class='material-icons'> folder_open </i></td>" +
 						"<td class='center'><i class='material-icons'> format_align_left </i></td>" +
 					"</tr>";
-				
-			}
-			else{
-				listedStudents.push(student); //something fishy is going on with these datatables
-			}
 		}
 
 		$("#studentDataTableBody").append(entry);
@@ -245,13 +219,13 @@
 
 	//table sorting
 	// Must add custom sory
-	$(document).ready(function () {
-		$('#studentDataTable').DataTable({
-			"ordering": true, // false to disable sorting (or any other option)
-			"paging": false
-		});
-		$('.dataTables_length').addClass('bs-select');
-	});
+	//$(document).ready(function () {
+	//	$('#studentDataTable').DataTable({
+	//		"ordering": true, // false to disable sorting (or any other option)
+	//		"paging": false
+//		});
+//		$('.dataTables_length').addClass('bs-select');
+//	});
 
 
 
@@ -271,84 +245,82 @@
 
 	}
 
-	function search() {
-		// Declare variables
-		var input, filter, table, tr, td, i, txtValue;
-		input = document.getElementById("myInput");
-		filter = input.value.toUpperCase();
-		table = document.getElementById("studentDataTable");
-		tr = table.getElementsByTagName("tr");
+	// function search() {
+	// 	// Declare variables
+	// 	var input, filter, table, tr, td, i, txtValue;
+	// 	input = document.getElementById("myInput");
+	// 	filter = input.value.toUpperCase();
+	// 	table = document.getElementById("studentDataTable");
+	// 	tr = table.getElementsByTagName("tr");
 
-		// Loop through all table rows, and hide those who don't match the search query
-		for (i = 0; i < tr.length; i++) {
-			td = tr[i].getElementsByTagName("td")[0];
-			if (td) {
-				txtValue = td.textContent || td.innerText;
-				if (txtValue.toUpperCase().indexOf(filter) > -1) {
-					tr[i].style.display = "";
-				} else {
-					tr[i].style.display = "none";
-				}
-			}
-		}
-	}
+	// 	// Loop through all table rows, and hide those who don't match the search query
+	// 	for (i = 0; i < tr.length; i++) {
+	// 		td = tr[i].getElementsByTagName("td")[0];
+	// 		if (td) {
+	// 			txtValue = td.textContent || td.innerText;
+	// 			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+	// 				tr[i].style.display = "";
+	// 			} else {
+	// 				tr[i].style.display = "none";
+	// 			}
+	// 		}
+	// 	}
+	// }
 
-	function sortTable(n) {
-		var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-		table = document.getElementById("studentDataTable");
-		switching = true;
-		// Set the sorting direction to ascending:
-		dir = "asc";
-		/* Make a loop that will continue until
-		no switching has been done: */
-		while (switching) {
-			// Start by saying: no switching is done:
-			switching = false;
-			rows = table.rows;
-			/* Loop through all table rows (except the
-			first, which contains table headers): */
-			for (i = 1; i < (rows.length - 1); i++) {
-				// Start by saying there should be no switching:
-				shouldSwitch = false;
-				/* Get the two elements you want to compare,
-				one from current row and one from the next: */
-				x = rows[i].getElementsByTagName("TD")[n];
-				y = rows[i + 1].getElementsByTagName("TD")[n];
-				/* Check if the two rows should switch place,
-				based on the direction, asc or desc: */
-				if (dir == "asc") {
-					if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-						// If so, mark as a switch and break the loop:
-						shouldSwitch = true;
-						break;
-					}
-				} else if (dir == "desc") {
-					if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-						// If so, mark as a switch and break the loop:
-						shouldSwitch = true;
-						break;
-					}
-				}
-			}
-			if (shouldSwitch) {
-				/* If a switch has been marked, make the switch
-				and mark that a switch has been done: */
-				rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-				switching = true;
-				// Each time a switch is done, increase this count by 1:
-				switchcount++;
-			} else {
-				/* If no switching has been done AND the direction is "asc",
-				set the direction to "desc" and run the while loop again. */
-				if (switchcount == 0 && dir == "asc") {
-					dir = "desc";
-					switching = true;
-				}
-			}
-		}
-	}
-
-
+	// function sortTable(n) {
+	// 	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+	// 	table = document.getElementById("studentDataTable");
+	// 	switching = true;
+	// 	// Set the sorting direction to ascending:
+	// 	dir = "asc";
+	// 	/* Make a loop that will continue until
+	// 	no switching has been done: */
+	// 	while (switching) {
+	// 		// Start by saying: no switching is done:
+	// 		switching = false;
+	// 		rows = table.rows;
+	// 		/* Loop through all table rows (except the
+	// 		first, which contains table headers): */
+	// 		for (i = 1; i < (rows.length - 1); i++) {
+	// 			// Start by saying there should be no switching:
+	// 			shouldSwitch = false;
+	// 			/* Get the two elements you want to compare,
+	// 			one from current row and one from the next: */
+	// 			x = rows[i].getElementsByTagName("TD")[n];
+	// 			y = rows[i + 1].getElementsByTagName("TD")[n];
+	// 			/* Check if the two rows should switch place,
+	// 			based on the direction, asc or desc: */
+	// 			if (dir == "asc") {
+	// 				if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+	// 					// If so, mark as a switch and break the loop:
+	// 					shouldSwitch = true;
+	// 					break;
+	// 				}
+	// 			} else if (dir == "desc") {
+	// 				if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+	// 					// If so, mark as a switch and break the loop:
+	// 					shouldSwitch = true;
+	// 					break;
+	// 				}
+	// 			}
+	// 		}
+	// 		if (shouldSwitch) {
+	// 			/* If a switch has been marked, make the switch
+	// 			and mark that a switch has been done: */
+	// 			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+	// 			switching = true;
+	// 			// Each time a switch is done, increase this count by 1:
+	// 			switchcount++;
+	// 		} else {
+	// 			/* If no switching has been done AND the direction is "asc",
+	// 			set the direction to "desc" and run the while loop again. */
+	// 			if (switchcount == 0 && dir == "asc") {
+	// 				dir = "desc";
+	// 				switching = true;
+	// 			}
+	// 		}
+	// 	}
+	// }
 
 
 
