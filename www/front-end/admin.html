@@ -61,10 +61,10 @@
 						<td class="center" style="font-weight: 700 ;"> Summary </td>
 					</tr>
 					<tr>
-						<td class="center">Total Submission: 10</td>
+						<td id="totalSubmissions" class="center">Total Submission: </td>
 					</tr>
 					<tr>
-						<td class="center">Average GPA: 3.0</td>
+						<td id="avgGpa" class="center">Average GPA: </td>
 					</tr>
 				</tbody>
 			</table>
@@ -294,6 +294,21 @@
             	window.open("../downloadStudents.php");
             }
         });
+	}
+	
+	//set total submissions and average gpa
+	function loadSummary(){
+		let total = Object.keys(students).length;
+		$("#totalSubmissions").html("Total Submissions: " + total);
+
+		let sumGpa = 0
+
+		for(var student in students){
+			sumGpa = students[student]['cum gpa'];
+		}
+
+		$("#avgGpa").html("Average GPA: " + sumGpa/total);
+
 	}
 
 
