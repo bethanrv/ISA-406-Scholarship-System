@@ -81,8 +81,8 @@
 			<thead>
 				<tr>
 					<th class="th-sm">Name</th>
-					<th class="th-sm">Year</th>
 					<th class="th-sm">Application Date</th>
+					<th class="th-sm">Grad. Year</th>
 					<th class="th-sm">Major(s)</th>
 					<th class="th-sm">Minor(s)</th>
 					<th class="th-sm">Cum. GPA</th>
@@ -98,8 +98,8 @@
 				<!--Example table element (do not remove)-->
 				<tr style="display: none;">
 					<td>James P. Sullivan</td>
-					<td>Junior</td>
 					<td>4/13/2020</td>
+					<td>2020</td>
 					<td>ISA</td>
 					<td>none</td>
 					<td>2.5</td>
@@ -131,53 +131,113 @@
 
 <script>
 
-	let flag = true;
+	let students = {}; //all students stored by uid
+	let grades = {}; //all grades stored by uid
+	let listedStudents = [];
 
 	//on page load...
 	$(document).ready(function () {
 		//DB Call for all application info + load summary (total apps and avg gpa)
-		if(flag){
-			$.ajax({
-				type: "GET",
-				url: "../back-end/students.csv",
-				dataType: "text",
-				success: function (data) {
-					processData(data);
-					var dbFile = processData(data);
+		
+		loadStudents();
 
-					dbFile.forEach(function(element){
-						appendToTable(element);
-					});
-
-				}
-			});
-		}
 
 	});
 
+	function loadStudents(){
+		//store name, app date
+
+		
+		$.ajax({
+			type: "GET",
+			url: "../back-end/students.csv",
+			dataType: "text",
+			success: function (data) {
+				var dbFile = processData(data);
+				
+				dbFile.forEach(function(info){
+					info = info.split(',');
+					students[info[0]] = {'Name':info[1], 'App Date':info[3], 'Year': '--', 'Major': '--','Minor': '--','cum gpa': '--','isa gpa': '--','maj gpa': '--' }; //add new student
+					
+				});
+
+				loadAdditionalInfo();
+			}
+		});
+
+	}
+
+	function loadAdditionalInfo(){
+		//store grad year, majors, minors, cum gpa, maj gpa, isa gpa. dars, cv
+		$.ajax({
+			type: "GET",
+			url: "../back-end/studentInfo.csv",
+			dataType: "text",
+			success: function (data) {
+				var studentInfoFile = processData(data);
+
+				studentInfoFile.forEach(function(info){
+					info = info.split(',');
+
+					students[info[0]]['Year'] = "20" + info[1];
+					//console.log(students[info[0]]['Year']); //console says type error but still works???
+					loadGrades();
+					appendToTable(students);
+				});
+
+			}
+		});
+
+	}
+
+
+	function loadGrades(){
+		//store  isa grades
+		$.ajax({
+			type: "GET",
+			url: "../back-end/studentGrades.csv",
+			dataType: "text",
+			success: function (data) {
+				var gradesFile = processData(data);
+				
+				gradesFile.forEach(function(info){
+					info = info.split(',');
+					grades[info[0]] = info.slice(1, info.length); 
+				});
+
+			}
+		});
+	}
+
 	//adding an element to table
 	function appendToTable(info, table){
-
 		let entry = "";
-
-		info = info.split(',');
 
 		console.log(info);
 
-		entry += 
-			"<tr>" +
-				"<td>"+  info[1] +"</td>" +
-				"<td> -- </td>" +
-				"<td>"+  info[3] +"</td>" +
-				"<td> -- </td>" +
-				"<td> -- </td>" +
-				"<td> -- </td>" +
-				"<td> -- </td>" +
-				"<td> -- </td>" +
-				"<td class='center'><i class='material-icons'> edit </i></td>" +
-				"<td class='center'><i class='material-icons'> folder_open </i></td>" +
-				"<td class='center'><i class='material-icons'> format_align_left </i></td>" +
-			"</tr>";
+		for(var student in info){
+
+			if(listedStudents.includes(student)){
+				entry += 
+					"<tr>" +
+						"<td>"+  info[student]['Name'] +"</td>" + //name
+						"<td>"+ info[student]['App Date'] +"</td>" +	
+						"<td>"+ info[student]['Year'] +"</td>" + // application date
+						"<td> -- </td>" +
+						"<td> -- </td>" +
+						"<td> -- </td>" +
+						"<td> -- </td>" +
+						"<td> -- </td>" +
+						"<td class='center'><i class='material-icons'> edit </i></td>" +
+						"<td class='center'><i class='material-icons'> folder_open </i></td>" +
+						"<td class='center'><i class='material-icons'> format_align_left </i></td>" +
+					"</tr>";
+				
+			}
+			else{
+				listedStudents.push(student); //something fishy is going on with these datatables
+			}
+		}
 
 		$("#studentDataTableBody").append(entry);
 	}
