@@ -90,7 +90,7 @@ if(isset($_POST['submitFiles'])){
             $grade = substr($file_string, $grade_pos + 33, 2);
         
             //  Add course to ISA list
-            if (substr($course, 0, 3) == "ISA") {
+            if (substr($course, 0, 3) == "ISA" && !strpos($isaGrades, $course)) {
               //  Append to end of $isaGrades
               if (strlen($isaGrades) > 0) {
                 $isaGrades = $isaGrades.", ";
