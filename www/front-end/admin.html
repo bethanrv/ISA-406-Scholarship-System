@@ -121,6 +121,8 @@
 	let students = {}; //all students stored by uid
 	let grades = {}; //all grades stored by uid
 	let UIDs = [] //additional list used for passing to php functions
+	let stringInfo = [] //list of student info to write into reports
+
 
 	//on page load...
 	$(document).ready(function () {
@@ -139,7 +141,7 @@
 				
 				dbFile.forEach(function(info){
 					info = info.split(',');
-					students[info[0]] = {'Name':info[1], 'App Date':info[3], 'Year': '--', 'Major': '--','Minor': '--','cum gpa': '--','isa gpa': '--','maj gpa': '--' }; //add new student
+					students[info[0]] = {'Name':info[1], 'App Date':info[3], 'Year': '--', 'Major': '--','Minor': '--','cum gpa': '--','isa gpa': '--','maj gpa': '--', 'Address': info[4] }; //add new student
 					//appened uid to list
 
 				});
