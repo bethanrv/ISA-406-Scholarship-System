@@ -228,8 +228,15 @@
 			let info = uid + ", " + dic[uid]['Name'] + ", " + dic[uid]['Email'] + ", " + dic[uid]['App Date'] + ", " + dic[uid]['Year'] + ", " + dic[uid]['Major'] + ", "+ dic[uid]['Minor'] + ", " + dic[uid]['cum gpa'] + ", " + dic[uid]['Address'];
 			stringInfo.push(info);
 		}
-		
 
+		$.ajax({
+            url: "../writeReport.php",
+            method: "post",
+            data: {'studentInfo':stringInfo},
+            success: function(res){
+            	console.log(res);
+            }
+        });
 
 	}
 
