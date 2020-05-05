@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
 
     <title>ISA Admin Login</title>
     <!-- main page icon -->
-    <link rel="shortcut icon" href="https://miamioh.edu/fbs/_files/images/page-content/controller/staff/block-m.jpg" >
+    <link rel="shortcut icon" href="https://miamioh.edu/fbs/_files/images/page-content/controller/staff/block-m.jpg">
 
     <!-- Style sheet -->
-    <link rel = "stylesheet" href = "./front-end/style.css"> 
+    <link rel="stylesheet" href="./front-end/style.css">
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -21,7 +22,7 @@
 
     <!-- icons pack -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-            
+
 </head>
 
 <body>
@@ -30,7 +31,7 @@
     <!-- header --->
     <nav>
         <div class="nav-wrapper header">
-          <a href="#" class="brand-logo center">ISA Admin Login</a>
+            <a href="#" class="brand-logo center">ISA Admin Login</a>
         </div>
     </nav>
 
@@ -47,10 +48,10 @@
     <div style="padding-bottom: 10vh;"></div>
 
 
-   
 
 
-     <!-- admin login form -->
+
+    <!-- admin login form -->
     <div id="userInfoForm" class="row" style="padding-left: 5vh; padding-right: 5vh;">
         <div class="col show-on-large l3"> </div>
         <form class="col s12 l6">
@@ -59,37 +60,38 @@
             <div class="row">
                 <div class="input-field col s12 center">
                     <label> Username </label>
-                    <input id="usernameInput" placeholder = "Username" type="text">
+                    <input id="usernameInput" placeholder="Username" type="text">
                 </div>
             </div>
 
-             <!-- password -->
-             <div class="row">
+            <!-- password -->
+            <div class="row">
                 <div class="input-field col s12">
                     <label> Password </label>
                     <input id="passwordInput" placeholder="Password" type="password">
                 </div>
-            </div>   
+            </div>
 
             <div id="loginErrorMessage" class="row" style="display: none;">
                 <div class="col s1 left">
-                     <i class="material-icons errorIcon">error_outline</i>
+                    <i class="material-icons errorIcon">error_outline</i>
                 </div>
 
-                <div  class="col 11 left">
-                     <p style="margin: 0; margin-top: 0.5vh;"> Error:  Invalid Credentials </p>
+                <div class="col 11 left">
+                    <p style="margin: 0; margin-top: 0.5vh;"> Error: Invalid Credentials </p>
                 </div>
             </div>
 
         </form>
     </div>
 
-    <div class="container center"> 
-        <a id="loginBtn" class="waves-effect waves-light btn" style="background-color: #d94141;"> <i class="material-icons"> send </i></a>
+    <div class="container center">
+        <a id="loginBtn" class="waves-effect waves-light btn" style="background-color: #d94141;"> <i
+                class="material-icons"> send </i></a>
     </div>
 
 
-     <!-- footer -->
+    <!-- footer -->
     <footer>
         <p class="right" style="padding-right: 3vh;">
             <a href="index.php" style="text-decoration: underline;">Back</a>
@@ -102,21 +104,65 @@
 
 
 <script>
+
+    let flag = true;
+
     //send to admin screen or show error message
-    $("#loginBtn").click(function(){
-        if (verifyCredentials()){
+    $("#loginBtn").click(function () {
+        if (verifyCredentials()) {
             window.location.replace("admin.php")
-        }   
-        else{
+        }
+        else {
             document.getElementById("loginErrorMessage").style.display = "block";
         }
     });
-    
+
 
     //validate user input
-    function verifyCredentials(){
-        //DB call!!!
-        return true;
+    function verifyCredentials() {
+
+        var validate = false;
+        
+        if (flag) {
+            $.ajax({
+                type: "GET",
+                url: "../back-end/admins.csv",
+                async: false,
+                dataType: "text",
+                success: function (data) {
+                    processData(data);
+                    var dbFile = processData(data);
+
+                    for (var i = 0; i < dbFile.length; i++) {
+                        var cred = dbFile[i].split(",");
+                        if ($('#usernameInput').val() == cred[0]) {
+                            if ($('#passwordInput').val() == cred[1]) {
+                                validate = true;
+                                break;
+                            }
+                        }
+
+                    }
+                }
+            });
+        }
+        return validate;
+    }
+
+    function processData(allText) {
+        var allTextLines = allText.split(/\r\n|\n/);
+        var headers = allTextLines[0].split(',');
+        allTextLines = allTextLines.slice(1); //remove header for reading
+        var lines = [];
+
+        allTextLines.forEach(function (element) {
+            if (element.split(',').length > 0) {
+                lines.push(element);
+            }
+        });
+
+        return lines;
+
     }
 
 </script>
