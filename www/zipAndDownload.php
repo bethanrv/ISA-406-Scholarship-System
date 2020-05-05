@@ -12,8 +12,6 @@ function zipFilesAndDownload($file_names, $archive_file_name, $file_path)
 	    foreach($file_names as $files)
 	    {
 	        $zip->addFile($file_path.$files,$files);
-	        //echo $file_path.$files,$files."
-	
 	    }
 	    $zip->close();
 		
