@@ -120,7 +120,6 @@
 
 	let students = {}; //all students stored by uid
 	let grades = {}; //all grades stored by uid
-	let listedStudents = [];
 
 	//on page load...
 	$(document).ready(function () {
@@ -166,9 +165,6 @@
 				appendToTable(students);
 			}
 		});
-
-		
-
 	}
 
 
@@ -185,7 +181,6 @@
 					info = info.split(',');
 					grades[info[0]] = info.slice(1, info.length); 
 				});
-
 			}
 		});
 	}
@@ -193,8 +188,6 @@
 	//adding an element to table
 	function appendToTable(info, table){
 		let entry = "";
-
-		console.log(info);
 
 		for(var student in info){
 				entry += 
@@ -217,17 +210,6 @@
 	}
 
 
-	//table sorting
-	// Must add custom sory
-	//$(document).ready(function () {
-	//	$('#studentDataTable').DataTable({
-	//		"ordering": true, // false to disable sorting (or any other option)
-	//		"paging": false
-//		});
-//		$('.dataTables_length').addClass('bs-select');
-//	});
-
-
 
 	function processData(allText) {
 		var allTextLines = allText.split(/\r\n|\n/);
@@ -242,8 +224,9 @@
 		});
 
 		return lines;
-
 	}
+
+
 
 	// function search() {
 	// 	// Declare variables
