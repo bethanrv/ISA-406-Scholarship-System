@@ -141,7 +141,7 @@
 				
 				dbFile.forEach(function(info){
 					info = info.split(',');
-					students[info[0]] = {'Name':info[1], 'App Date':info[3], 'Year': '--', 'Major': '--','Minor': '--','cum gpa': '--','isa gpa': '--','maj gpa': '--', 'Address': info[4] }; //add new student
+					students[info[0]] = {'Name':info[1], 'Email': info[2], 'App Date':info[3], 'Year': '--', 'Major': '--','Minor': '--','cum gpa': '--','isa gpa': '--','maj gpa': '--', 'Address': info[4] }; //add new student
 					//appened uid to list
 
 				});
@@ -215,9 +215,23 @@
 
 		$("#studentDataTableBody").append(entry);
 
+		strinifyStudentData(students);
 
 	}
 
+	//turn student dictionary into list of string data
+	function strinifyStudentData(dic){
+		let stringInfo = [];
+
+		for(var uid in dic){
+			UIDs.push(uid);
+			let info = uid + ", " + dic[uid]['Name'] + ", " + dic[uid]['Email'] + ", " + dic[uid]['App Date'] + ", " + dic[uid]['Year'] + ", " + dic[uid]['Major'] + ", "+ dic[uid]['Minor'] + ", " + dic[uid]['cum gpa'] + ", " + dic[uid]['Address'];
+			stringInfo.push(info);
+		}
+		
+
+
+	}
 
 
 	function processData(allText) {
