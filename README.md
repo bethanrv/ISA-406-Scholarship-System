@@ -3,7 +3,7 @@ ISA Department Scholarship Application Website
 
 ### Stack Details 
  - Front-end: No framework used (html/css/js included in directory 'front-end')
- - Back-end: WAMPS Server (PHP webmethods)
+ - Back-end: WAMP Server (PHP webmethods)
  - Database stored as csv files in directory 'back-end'
   
 ### Implementation Details
