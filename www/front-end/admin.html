@@ -85,12 +85,8 @@
 					<th class="th-sm">Grad. Year</th>
 					<th class="th-sm">Major(s)</th>
 					<th class="th-sm">Minor(s)</th>
-					<th class="th-sm">Cum. GPA</th>
-					<th class="th-sm">ISA GPA</th>
-					<th class="th-sm">Maj. GPA</th>
-					<th class="th-sm"> ISA Grades </th>
-					<th class="th-sm"> DARS </th>
-					<th class="th-sm"> CV </th>
+					<th class="th-sm">GPA</th>
+					<th class="th-sm"> Files </th>
 				</tr>
 			</thead>
 			<tbody id="studentDataTableBody">
@@ -205,11 +201,7 @@
 						"<td>" + info[student]['Major'] + "</td>" +
 						"<td>" + info[student]['Minor'] + "</td>" +
 						"<td>" + info[student]['cum gpa'] + "</td>" +
-						"<td> -- </td>" +
-						"<td> -- </td>" +
-						"<td class='center'><i class='material-icons'> edit </i></td>" +
-						"<td class='center'><i class='material-icons'> folder_open </i></td>" +
-						"<td class='center'><i class='material-icons'> format_align_left </i></td>" +
+						"<td class='center'><i class='material-icons' onclick=downloadStudent('" + (student) +"')> folder_open </i></td>" +
 					"</tr>";
 		}
 
@@ -233,10 +225,7 @@
 		$.ajax({
             url: "../writeReport.php",
             method: "post",
-            data: {'studentInfo':stringInfo},
-            success: function(res){
-            	console.log(res);
-            }
+            data: {'studentInfo':stringInfo}
         });
 
 	}
@@ -265,7 +254,6 @@
         $.ajax({
             url: "../downloadStudents.php",
             method: "post",
-            data: {'UIDs':UIDs},
             success: function(){
             	window.open("../downloadStudents.php");
             }
@@ -280,11 +268,23 @@
 		let sumGpa = 0
 
 		for(var student in students){
-			sumGpa = students[student]['cum gpa'];
+			sumGpa += parseFloat(students[student]['cum gpa']);
 		}
 
 		$("#avgGpa").html("Average GPA: " + sumGpa/total);
 
+	}
+
+	//download single student
+	function downloadStudent(uid){
+		$.ajax({
+            url: "../bin/downloadConfig.php",
+            method: "post",
+            data: {uid},
+            success: function(){
+            	window.open("../downloadSingleStudent.php");
+            }
+        });
 	}
 
 

@@ -1,9 +1,15 @@
 <?php
 
-$filename="./back-end/Report";
-$zip_file = 'report.zip';
+$myfile = fopen("./bin/downloadConfig.txt", "r") or die("Unable to open file!");
+fgets($myfile);
+$uid = fgets($myfile);
+fclose($myfile);
+
+
+$filename="./back-end/Report/" . $uid ."/";
+$zip_file = $uid . ' report.zip';
 // Get real path for our folder
-$rootPath = "./back-end/Report/";
+$rootPath = $filename;
 // Initialize archive object
 $zip = new ZipArchive();
 $zip->open($zip_file, ZipArchive::CREATE | ZipArchive::OVERWRITE);
@@ -43,5 +49,6 @@ header('Cache-Control: must-revalidate');
 header('Pragma: public');
 header('Content-Length: ' . filesize($zip_file));
 readfile($zip_file);
+
 
 ?>
