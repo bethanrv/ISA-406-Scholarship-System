@@ -4,6 +4,7 @@ $students = $_POST['studentInfo'];
 
 foreach($students as $student){
 	$uid = explode(", ", $student)[0];
+	$dirname = "./back-end/Report/".$uid;
 
 	if (is_dir($dirname)) {
           $dir_handle = opendir($dirname);
