@@ -72,8 +72,36 @@
 		<div class="col s4"> </div>
 	</div>
 
+	<!-- Filter -->
+	<div class="row center">
+			<input placeholder="Search" id="serach" type="text" style="width: 50%;">
+	</div>
+	<div class="row center">
+
+		<div class="col s5"> </div>
+		<div class="col s2">
+			<div class="input-field" >
+			    <select>
+			      <option value="" disabled selected>Field...</option>
+			      <option value="1">Name</option>
+			      <option value="2">Application Date</option>
+			      <option value="3">Grad. Year</option>
+			      <option value="4">Majors</option>
+			      <option value="5">Minors</option>
+			      <option value="6">GPA</option>
+			    </select>
+			</div> 
+		</div>
+		<div class="col s2">
+			<a class="left btn waves-effect waves-light" style="background-color: #d94141;">
+		 		<i class="material-icons"> send </i> 
+		 	</a>
+		 </div>
+		<div class="col s3"> </div>
+	</div>
 
 
+	<!-- Student info data table -->
 	<div class="container center" style="padding-bottom: 5vh;" id="test">
 
 		<table id="studentDataTable" class="table table-striped table-bordered" cellspacing="0" width="100%"
@@ -124,6 +152,9 @@
 	$(document).ready(function () {
 		//DB Call for all application info + load summary (total apps and avg gpa)
 		loadStudents();
+
+		//load serach
+		$('select').formSelect();
 	});
 
 	function loadStudents(){
