@@ -6,8 +6,6 @@ $cv_file = '';
 $dar_file= '';
 $uid = $_POST['uid'];
 
-
-
 if(isset($_POST['submitFiles'])){
 
   $target_dir_cv = "./back-end/CV/";
@@ -34,8 +32,7 @@ if(isset($_POST['submitFiles'])){
 
         //  ------------------  //
         /*
-         * Done (I think): $majors, $minors, $cumGPA, $isaGrades
-         * $year: gradyear or year?
+         * Done (I think): $majors, $minors, $cumGPA, $isaGrades, $year
          * $isaGPA: Find field in file
          * $majGPA: Find field in file
          */
@@ -119,10 +116,4 @@ if(isset($_POST['submitFiles'])){
 
   
 }
-
-
-
-
-
-
 ?>
