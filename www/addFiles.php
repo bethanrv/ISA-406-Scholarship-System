@@ -64,7 +64,7 @@ if(isset($_POST['submitFiles'])){
 	}
         
         //  Find Cumulative GPA  //
-        $gpa_index = strpos($file_string, ";\">", strpos($file_string, "graphGPALabel") + 150) + 3;
+        $gpa_index = strpos($file_string, "OVERALL :") + 60;
         $cumGPA = substr($file_string, $gpa_index, 3);
         
         $index = 1;
