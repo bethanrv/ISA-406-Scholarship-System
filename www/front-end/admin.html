@@ -333,11 +333,12 @@
 		//get search input
 		let inputField = $('#search-field').val();
 
+		//name filter
 		if(field == 1){
 			for(var stu in students){
 
 				if(students[stu]['Name'].toLowerCase() == inputField.toLowerCase()){
-					filtered_students.stu = students[stu];
+					filtered_students[stu] = students[stu];
 				}
 				else{
 					let name = students[stu]['Name'].split(' ');
@@ -349,17 +350,94 @@
 						}
 					}
 					if(flag){
-						filtered_students.stu = students[stu];
+						filtered_students[stu] = students[stu];
 					}
 				}				
-			}
-			appendToTable(filtered_students);
+			}	
 		}
 
-		
+		//app date filter
+		else if(field == 2){
+			var filterDate = new Date(inputField);
+			for(var stu in students){
+				var stuDate = new Date(students[stu]['App Date']);
+				if(stuDate.getTime() >= filterDate.getTime()){
+					filtered_students[stu] = students[stu];
+				}
+			}
+		}
 
+		//grad date filter
+		else if(field == 3){
+			var filterDate = inputField;
+			for(var stu in students){
+				var stuDate = students[stu]['Year'];
+				if(stuDate  == filterDate){
+					filtered_students[stu] = students[stu];
+				}
+			}
+		}
 
+		//Majors filter
+		else if(field == 4){
+			for(var stu in students){
 
+				if(students[stu]['Major'].toLowerCase() == inputField.toLowerCase()){
+					filtered_students[stu] = students[stu];
+				}
+
+				else if(students[stu]['Major'].split(' ').length > 1){
+					let name = students[stu]['Major'].split(' ');
+					//check first and last names
+					var flag = false;
+					for(var sname in name){
+						if(name[sname].toLowerCase() == inputField.toLowerCase()){
+							flag = true;
+						}
+					}
+					if(flag){
+						filtered_students[stu] = students[stu];
+					}
+				}				
+			}	
+		}
+
+		//Minors filter
+		else if(field == 5){
+			for(var stu in students){
+
+				if(students[stu]['Minor'].toLowerCase() == inputField.toLowerCase()){
+					filtered_students[stu] = students[stu];
+				}
+
+				else if(students[stu]['Minor'].split(' ').length > 1){
+					let name = students[stu]['Minor'].split(' ');
+					//check first and last names
+					var flag = false;
+					for(var sname in name){
+						if(name[sname].toLowerCase() == inputField.toLowerCase()){
+							flag = true;
+						}
+					}
+					if(flag){
+						filtered_students[stu] = students[stu];
+					}
+				}				
+			}	
+		}
+
+		//grad date filter
+		else if(field == 6){
+			var filterGPA = parseFloat(inputField);
+			for(var stu in students){
+				var stuGPA = parseFloat(students[stu]['cum gpa']);
+				if(stuGPA  >= filterGPA){
+					filtered_students[stu] = students[stu];
+				}
+			}
+		}
+
+		appendToTable(filtered_students);
 		//show clear btn
 		$("#clearBTN").css('display', 'block');
 	}
