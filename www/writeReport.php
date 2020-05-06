@@ -8,9 +8,7 @@ foreach($students as $student){
 	if (is_dir($dirname)) {
           $dir_handle = opendir($dirname);
 	}
-        if (!$dir_handle) {
-          return false;
-	} else {
+        if ($dir_handle) {
           while($file = readdir($dir_handle)) {
             if ($file != "." && $file != "..") {
               if (!is_dir($dirname."/".$file))
