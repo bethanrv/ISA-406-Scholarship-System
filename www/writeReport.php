@@ -5,12 +5,23 @@ $students = $_POST['studentInfo'];
 foreach($students as $student){
 	$uid = explode(", ", $student)[0];
 
-	if(file_exists("./back-end/Report/". $uid . "/" . $uid . ".csv")){
-		$files = glob('./back-end/Report/". $uid . "/*'); // get all file names
-		foreach($files as $file){ // iterate files
-		  if(is_file($file))
-		    unlink($file); // delete file
-		}
+	if (is_dir($dirname)) {
+          $dir_handle = opendir($dirname);
+	}
+        if (!$dir_handle) {
+          return false;
+	} else {
+          while($file = readdir($dir_handle)) {
+            if ($file != "." && $file != "..") {
+              if (!is_dir($dirname."/".$file))
+                unlink($dirname."/".$file);
+              else {
+                delete_directory($dirname.'/'.$file);
+	      }
+            }
+          }
+         closedir($dir_handle);
+         rmdir($dirname);
 	}
 
 	
