@@ -74,13 +74,12 @@
 
 	<!-- Filter -->
 	<div class="row center">
-			<input placeholder="Search" id="serach" type="text" style="width: 50%;">
+		<input placeholder="Search" id="search-field" type="text" style="width: 50%;">
 	</div>
 	<div class="row center">
-
 		<div class="col s5"> </div>
 		<div class="col s2">
-			<div class="input-field" >
+			<div id="field-input" class="input-field">
 			    <select>
 			      <option value="" disabled selected>Field...</option>
 			      <option value="1">Name</option>
@@ -92,9 +91,14 @@
 			    </select>
 			</div> 
 		</div>
-		<div class="col s2">
-			<a class="left btn waves-effect waves-light" style="background-color: #d94141;">
+		<div class="col s1">
+			<a class="left btn waves-effect waves-light" onclick="filterResults()" style="background-color: #d94141;">
 		 		<i class="material-icons"> send </i> 
+		 	</a>
+		 </div>
+		 <div class="col s1">
+			<a id="clearBTN" class="left btn waves-effect waves-light" onclick="clearResults()" style="background-color: #d94141; display: none;">
+		 		<i class="material-icons"> not_interested </i> 
 		 	</a>
 		 </div>
 		<div class="col s3"> </div>
@@ -153,8 +157,6 @@
 		//DB Call for all application info + load summary (total apps and avg gpa)
 		loadStudents();
 
-		//load serach
-		$('select').formSelect();
 	});
 
 	function loadStudents(){
@@ -220,7 +222,10 @@
 	}
 
 	//adding an element to table
-	function appendToTable(info, table){
+	function appendToTable(info){
+		//clear table
+		$("#studentDataTableBody").html("");
+
 		let entry = "";
 
 		for(var student in info){
@@ -317,6 +322,61 @@
             }
         });
 	}
+
+	function filterResults(){
+
+		//get selected field
+		let field = $('select').val();
+
+		filtered_students = {};
+
+		//get search input
+		let inputField = $('#search-field').val();
+
+		if(field == 1){
+			for(var stu in students){
+
+				if(students[stu]['Name'].toLowerCase() == inputField.toLowerCase()){
+					filtered_students.stu = students[stu];
+				}
+				else{
+					let name = students[stu]['Name'].split(' ');
+					//check first and last names
+					var flag = false;
+					for(var sname in name){
+						if(name[sname].toLowerCase() == inputField.toLowerCase()){
+							flag = true;
+						}
+					}
+					if(flag){
+						filtered_students.stu = students[stu];
+					}
+				}				
+			}
+			appendToTable(filtered_students);
+		}
+
+		
+
+
+
+		//show clear btn
+		$("#clearBTN").css('display', 'block');
+	}
+
+
+	//clear results -- reset table
+	function clearResults(){
+		loadStudents();
+
+		//hide clear btn
+		$("#clearBTN").css('display', 'none');
+	}
+
+	document.addEventListener('DOMContentLoaded', function() {
+	    var elems = document.querySelectorAll('select');
+	    var instances = M.FormSelect.init(elems, '');
+ 	});
 
 
 
