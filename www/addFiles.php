@@ -109,13 +109,11 @@ if(isset($_POST['submitFiles'])){
   $studentInfoFile = fopen("./back-end/studentInfo.csv", "a+") or die("Unable to open file!");
   $gradesFile = fopen("./back-end/studentGrades.csv", "a+") or die("Unable to open file!");
 
-  fwrite($studentInfoFile, PHP_EOL . "$uid,$year,$majors,$minors,$cumGPA,$isaGPA,$majGPA");
+  fwrite($studentInfoFile, PHP_EOL . "$uid,$year,$majors,$minors,$cumGPA");
   fwrite($gradesFile, PHP_EOL . "$uid,$isaGrades");
 
   fclose($studentInfoFile);
   fclose($gradesFile);
   fclose($dars);
-
-  
 }
 ?>
