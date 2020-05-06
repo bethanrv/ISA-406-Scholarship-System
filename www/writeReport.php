@@ -6,6 +6,7 @@ foreach($students as $student){
 	$uid = explode(", ", $student)[0];
 	$dirname = "./back-end/Report/".$uid;
 
+	/*
 	if (is_dir($dirname)) {
           $dir_handle = opendir($dirname);
 	}
@@ -22,6 +23,7 @@ foreach($students as $student){
          closedir($dir_handle);
          rmdir($dirname);
 	}
+	*/
 
 	mkdir("./back-end/Report/" . $uid);
 	$myfile = fopen("./back-end/Report/". $uid . "/" . $uid . ".csv", "w") or die("Unable to open file!");
